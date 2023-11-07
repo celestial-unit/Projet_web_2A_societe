@@ -26,6 +26,10 @@ body {
   position: relative;
   width: 100%;
 }
+.img1{
+  position: fixed;
+  
+}
 
 /* =============== Navigation ================ */
 .navigation {
@@ -367,7 +371,7 @@ body {
   min-height: 500px;
   padding: 20px;
   background: var(--white);
-  box-shadow: 0 7px 25px rgba(225, 7, 7, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
 }
 .recentCustomers .imgBx {
