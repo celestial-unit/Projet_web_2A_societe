@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Survey Form - freecodecamp</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body id="main">
+
+  <header>
+    <div class="survey-header">
+      <h1 id="title">Omurice Quality Evaluation Form</h1>
+      <p id="description">Thank you for taking your precious time to answer these questions!</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="survey-container">
+      <form id="survey-form">
+
+        <!--         for name -->
+        <div class="survey-element" id="survey-name">
+          <label for="name" id="name-label">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <!--         for email -->
+        <div class="survey-element" id="survey-email">
+          <label for="email" id="email-label">Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <!--         for age -->
+        <div class="survey-element" id="survey-age">
+          <label for="number" id="number-label">Age (optional)</label>
+          <input type="number" id="number" placeholder="Age" min="1" max="200">
+        </div>
+
+        <!--         for drop-down menu -->
+        <div class="survey-element" id="survey-dropdown">
+          <label id="survey-dropdown-1-label">Which option best describes your current status?</label>
+          <select>
+            <option value="" disabled selected>Select current status</option>
+            <option value="Student">Student</option>
+            <option value="Working full-time">Working full-time</option>
+            <option value="Working part-time">Working part-time</option>
+            <option value="Not working">Not working</option>
+            <option value="Retired">Retired</option>
+            <option value="Prefer not to answer">Prefer not to answer</option>
+          </select>
+        </div>
+
+        <!--         for radio buttons -->
+        <div class="survey-element" id="survey-radio">
+          <label id="survey-radio-label">Are you looking for a paid training?</label>
+          <label class="survey-radio-button" for="definitely">
+            <input type="radio" id="definitely" name="recommend" value="Definitely">Yes
+          </label>
+          <label class="survey-radio-button" for="maybe">
+            <input type="radio" id="maybe" name="recommend" value="Maybe"> No
+          </label>
+        </div>
+
+        <!--         for drop-down menu -->
+        <div class="survey-element" id="dropdown">
+          <label id="survey-dropdown-2-label">How did you hear about this training?</label>
+          <select>
+            <option value="" disabled selected>Select  an option</option>
+            <option value="tomato">Colleague referral</option>
+            <option value="cream"> Company website</option>
+            <option value="curry"> Social media</option>
+          </select>
+        </div>
+
+        <!--         for checkboxes -->
+        <div class="survey-element" id="survey-checkbox">
+          <label id="survey-checkbox-label">In which areas do you like to do your training?</label>
+
+          <label class="survey-checkbox-option" for="option-1">
+            <input type="checkbox" id="option-1" name="option-1" value="dish-color"> IT/Cyber security
+          </label>
+
+          <label class="survey-checkbox-option" for="option-2">
+            <input type="checkbox" id="option-2" name="option-2" value="rice-flavour"> Marketing
+          </label>
+
+          <label class="survey-checkbox-option" for="option-3">
+            <input type="checkbox" id="option-3" name="option-3" value="side-dish"> AI/Machine Learning
+          </label>
+
+          <label class="survey-checkbox-option" for="option-4">
+            <input type="checkbox" id="option-4" name="option-4" value="salad"> Design
+          </label>
+
+          <label class="survey-checkbox-option" for="option-5">
+            <input type="checkbox" id="option-5" name="option-5" value="sauce-flavour">Game developement
+          </label>
+
+          <label class="survey-checkbox-option" for="option-6">
+            <input type="checkbox" id="option-6" name="option-6" value="staff-behaviour"> Web developement
+          </label>
+        </div>
+
+        <!--         for text area -->
+        <div class="survey-element" id="survey-text-area">
+          <label for="review" id="survey-text-area-label">We would love to hear more from you</label>
+          <textarea id="review" name="review" rows="7" placeholder="Give us any suggestions..."></textarea>
+        </div>
+
+        <!--         Submit button -->
+        <div class="survey-element" id="survey-submit">
+          <input type="submit" id="submit" value="Send us">
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+<!-- partial -->
+  
+
+</body>
+</html>
