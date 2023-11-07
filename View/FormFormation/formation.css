@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200i,400&display=swap');
 
 :root {
-  --color-white: #f3f3f3;
+  --color-white: #100f0f;
   --color-darkblue: rgb(219, 187, 163);
   --color-darkblue-alpha: rgba(186, 159, 139, 0.8);
   --color-green: #584234;
@@ -32,15 +32,11 @@ body::before {
   width: 100%;
   z-index: -1;
   background: var(--color-darkblue);
-  background-image: linear-gradient(
-      115deg,
-      rgba(158, 113, 58, 0.489),
-      rgba(46, 29, 4, 0.7)
-    ),
-    url('https://www.formation-informatique.online/wp-content/uploads/2020/05/formation-informatique-en-ligne-1024x480.jpg?fbclid=IwAR0unp3kI5y9vgv5ajdPsCpBS4_M3SxHD7z4tBu14U3-XajF87cEz4xDeMY');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-image: 
+    url('https://s1.edi-static.fr/Img/BREVE/2020/7/351259/Comment-repenser-formations-professionnelles-dans-monde-travail-pleine-mutation--F.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 h1 {
