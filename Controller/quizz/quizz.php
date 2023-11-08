@@ -55,10 +55,10 @@
             <hr>
             <div class="card-body">
                 <select class="select-answer">
-                    <option value="2*6+2*9">2*6+2*9</option>
-                    <option value="2*6-2*9">2*6-2*9</option>
+                    <option value="2*6+2*9">answer1</option>
+                    <option value="2*6-2*9">answer2</option>
                 </select>
-                <button class="button-answer">Soumettre</button>
+                <button class="button-answer">Submit</button>
             </div>
         </div>
         <div class="card">
