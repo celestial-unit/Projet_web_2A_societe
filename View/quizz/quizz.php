@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Quizz</title>
-  <link rel="stylesheet" href="./View/quizz/quizz.css">
+  <link rel="stylesheet" href="./quizz.css">
 
 </head>
 <body>
