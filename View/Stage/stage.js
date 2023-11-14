@@ -1,68 +1,68 @@
-const inputs = document.querySelectorAll('.input');
+// script.js
+
+console.log('Script loaded successfully');
+
 const form = document.querySelector('form');
-// const [firstname, lastname, email, phone, city, country, linkedln, website] = inputs;
-// const cvLabel = document.querySelector('cv-label');
-// const file = document.querySelector('input[type="file"]');
-const file = document.querySelector('#cv');
-const checkbox = document.querySelector('input[type="checkbox"]')
 
-
-for (let input of inputs) {
-    input.addEventListener('focus', () => {
-        let parent = input.parentElement;
-        let label = parent.querySelector('label')
-        label.className = "label focus"
-        label.style.visibility = "visible"
-    })
-
-    input.addEventListener('blur', () => {
-        let parent = input.parentElement;
-        let label = parent.querySelector('label')
-        label.className = "label";
-        label.style.visibility = "hidden"
-    })
-}
-
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', function (e) {
     e.preventDefault();
-    validateInputs();
 
-})
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
 
-function validateInputs() {
+    
+    const nameRegex = /^[a-zA-Z]+$/;
+    if (!nameRegex.test(firstname) || !nameRegex.test(lastname)) {
+        alert('Please enter valid first and last names (letters only).');
+        return;
+    }
+
    
-    for (let input of inputs) {
-
-        if (input.name !== "website") {
-            if (input.value.trim() === "") showError(input, "This field is required");
-            else {
-                showSuccess(input)
-            }
-        }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
     }
 
-    if (file.value === "") showError(file, "No file selected");
-    else {
-        showSuccess(file);
-        if (!checkbox.checked) showError(checkbox, "Do you agree?")
-        else {
-            showSuccess(checkbox);
-            form.reset();
-            window.open("https://codepen.io/i_amsuperfly/pen/MWrEjar", '_self');
-        }
+    
+    const phoneRegex = /^[0-9]+$/;
+    if (!phoneRegex.test(phone)) {
+        alert('Please enter a valid phone number (numbers only).');
+        return;
     }
 
+    console.log('Validation passed'); 
 
-}
+   
+    const formData = new FormData(this);
 
-function showError(input, message) {
-    const formControl = input.parentElement;
-    const errorMessage = formControl.querySelector('small');
-    errorMessage.innerText = message;
-    formControl.className = "form-control text error"
-}
+    console.log('FormData:', formData); 
+    fetch('submit_form.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Server response:', data); // Add this line for debugging
 
-function showSuccess(input) {
-    const formControl = input.parentElement;
-    formControl.className = "form-control text"
-}
+        if (data.status === 'success') {
+            alert('Form submitted successfully!');
+            // Optionally, you can redirect to another page
+            location.reload();
+        } else {
+            alert('Error .');
+            console.error(data.message);
+        }
+    })
+    .catch(error => {
+        alert('done.');
+        console.error(error);
+    });
+});
