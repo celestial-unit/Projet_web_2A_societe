@@ -2,8 +2,10 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Application Form</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'><link rel="stylesheet" href="./stage.css">
+  <title>formulaire du stage</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
+  <link rel="stylesheet" href="./stage.css">
+ 
 
 </head>
 <body>
@@ -20,7 +22,7 @@
 
 <main>
   <section class="container">
-    <form action="/" id="form">
+    <form action="./submit_form.php" id="form" method="post">
       <div class="form-control text">
         <label for="" class="label">First name</label>
         <input class="input" type="text" name="firstname" id="firstname" placeholder="First name">
@@ -58,22 +60,28 @@
         <i class="fa-solid fa-circle-exclamation"></i>
         <small>Error message</small>
       </div>
-      <div class="form-control text">
-        <label for="" class="label">Linkedln Profile</label>
-        <input class="input" type="text" name="linkedln" id="linkedln" placeholder="Linkedln link">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <small>Error message</small>
-      </div>
-      <div class="form-control text">
-        <label for="" class="label">Website</label>
-        <input class="input" type="url" placeholder="Website,  https://example.com" pattern="https://.*" name="website" id="website">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <small>Error message</small>
-      </div>
       <div id="textarea-container">
         <textarea name="about" id="" cols="30" rows="5" placeholder="Tell us about yourself..."></textarea>
       </div>
 
+<div class="form-control text">
+  <label for="" class="label">Sex</label>
+  <select class="input" name="sex" id="sex">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+  </select>
+  <i class="fa-solid fa-circle-exclamation"></i>
+  <small>Error message</small>
+</div>
+
+<div class="form-control text">
+  <label for="" class="label">age</label>
+  <input class="input" type="text" name="age" id="birthday">
+  <i class="fa-solid fa-circle-exclamation"></i>
+  <small>Error message</small>
+</div>
+
+    
       <div class="form-control least">
         <label for="cv" id="cv-label">Upload CV: (File type <strong>.PDF</strong> only)</label>
         <input type="file" id="cv" name="cv" accept="application/pdf">
@@ -93,7 +101,7 @@
   </section>
 </main>
 <!-- partial -->
-  <script  src="./script.js"></script>
+<script  src="./stage.js"></script>
 
 </body>
 </html>
