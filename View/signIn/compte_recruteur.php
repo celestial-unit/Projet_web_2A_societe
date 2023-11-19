@@ -174,22 +174,15 @@ echo '</script>';
                         <h2>Recent statistics about our start up</h2>
                         <a href="#" class="btn">View All</a>
                     </div>
-                <li>
+                <div>
                 <img src="https://www.iweps.be/wp-content/uploads/2023/06/L025-Graph2.jpg" alt="Description de l'image">
                     
-                </li>
-                <li>
+</div>
+                <div>
+                <img src="https://cdn.statcdn.com/Statistic/1125000/1127341-blank-754.png" alt="Description de l'image">
                     
-                    
-                </li>
-                <li>
-                    
-                    
-                </li>
-                <li>
-                    
-                    
-                </li>
+</div>
+        
         <!-- Ajoutez plus d'éléments li pour chaque image avec du texte -->
     </ul>
                 </div>
@@ -271,6 +264,58 @@ echo '</script>';
                                 <h4>Amit <br> <span>India</span></h4>
                             </td>
                         </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>David <br> <span>Italy</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Amit <br> <span>India</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="https://images.unsplash.com/photo-1508243529287-e21914733111?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>David <br> <span>Italy</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="https://images.unsplash.com/photo-1514222709107-a180c68d72b4?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Amit <br> <span>India</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Julia <br> <span>Italy</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Yassine<br> <span>India</span></h4>
+                            </td>
+                        </tr>
+
+
                     </table>
                 </div>
             </div>
