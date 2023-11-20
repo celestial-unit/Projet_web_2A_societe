@@ -53,6 +53,7 @@ $personne->setValuesFromSession();
       <button onclick="redirectToMainPage()">Return </button>
     </div>
     <div>
+    <button id="editAccountBtn">edit account</button>
     <button id="deleteAccountBtn">delete account</button>
     </div>
 </body>
@@ -81,5 +82,10 @@ $personne->setValuesFromSession();
     }
   });
 });
+
+var editAccountBtn = document.getElementById("editAccountBtn");
+    editAccountBtn.addEventListener("click", function() {
+        window.location.href = "formsuppetudiant.html"; 
+    });
    </script>
 </html>
