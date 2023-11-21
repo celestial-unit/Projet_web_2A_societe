@@ -44,7 +44,7 @@
                 <li>
                     <a href="">
                         <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
+                            <ion-icon name="settings-outline"></ion-icon>
                         </span>
                         <span class="title">internship management</span>
                     </a>
@@ -56,6 +56,14 @@
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
                         <span class="title">club management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">training management</span>
                     </a>
                 </li>
 
