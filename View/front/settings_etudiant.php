@@ -87,51 +87,27 @@
 </form>
 </body>
 <script>
+  
   function retourner() 
   {
     window.location.href = '../signIn/compte_etudiant.php';
   }
-  document.getElementById('retourner').addEventListener('click',retourner);
-  function updatePassword() {
-    var currentPasswordElement = document.getElementById('currentPalssword');
-    var newPasswordElement = document.getElementById('newPassword');
+  const alertParam = '<?php echo isset($_SESSION['alert']) ? $_SESSION['alert'] : ''; ?>';
 
-    if (currentPasswordElement && newPasswordElement) {
-      var currentPassword = currentPasswordElement.value;
-      var newPassword = newPasswordElement.value;
-
-      // Effectuer la requête AJAX
-      fetch('setting_etudiant.php?pwd=' + encodeURIComponent(currentPassword) + '&newPassword=' + newPassword, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
-      .then(response => response.text())
-      .then(data => {
-        console.log('Server response:',data);
-
-        if (data.includes('Password changed successfully')) {
-          alert('Password updated successfully');
-          window.location.href = 'settings_etudiant.php';
-        } 
-        else if (data.includes('Failed to update password'))
-        {
-          alert('Failed to update password');
-          window.location.href = 'settings_etudiant.php';
-        }
-        else if (data.includes('Wrong password'))
-        {
-          alert('Wrong password');
-          window.location.href = 'settings_etudiant.php';
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    } else {
-      console.error('One or both elements not found');
+    // Afficher l'alerte correspondante
+    if (alertParam === 'success') {
+        alert('Password changed successfully');
+    } else if (alertParam === 'failure') {
+        alert('Failed to update password');
+    } else if (alertParam === 'wrongpassword') {
+        alert('Wrong password');
+    }else if (alertParam === 'passwordmismatch') {
+        alert('Password and confirmation do not match');
+    }else if (alertParam === 'usernotfound') {
+        alert('User not found');
     }
-  }
+
+    // Effacer le message d'alerte de la session
+    <?php unset($_SESSION['alert']); ?>
 </script>
 </html>
