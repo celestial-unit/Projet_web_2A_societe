@@ -1,3 +1,10 @@
+<?php
+include("../../Controller/sign.php");
+$pdo = Config::getConnexion(); // Assurez-vous d'avoir une connexion PDO
+$personne = new Personne();
+$userCount = $personne->countUsers($pdo);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,7 +111,7 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">100</div>
+                        <div class="numbers"><?php echo $userCount; ?></div>
                         <div class="cardName">Number of users</div>
                     </div>
 

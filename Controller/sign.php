@@ -181,6 +181,27 @@ public function showUserList()
     }
 }
 
+public function countUsers($pdo)
+    {
+        try {
+            // Préparez la requête SQL pour compter le nombre d'utilisateurs
+            $query = "SELECT COUNT(*) as userCount FROM personne";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+
+            // Récupérez le résultat
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Retournez le nombre d'utilisateurs
+            return isset($result['userCount']) ? (int)$result['userCount'] : 0;
+        } catch (PDOException $e) {
+            // Gérer les erreurs de base de données
+            error_log('Erreur : ' . $e->getMessage());
+            return 0; // Retourner 0 en cas d'erreur
+        }
+    }
+
+
     
     
     
