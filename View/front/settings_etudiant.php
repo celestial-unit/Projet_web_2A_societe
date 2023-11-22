@@ -77,7 +77,7 @@
                   <input class="btn btn-primary" type="submit" onclick="updatePassword()" >
                 </div>
                 <div class="form-btns clearfix">
-                  <input class="btn btn-primary" value="Return" id="retourner" >
+                  <input class="btn btn-primary" value="Return" id="retourner">
                 </div>
             </div>
         </div>
@@ -88,10 +88,12 @@
 </body>
 <script>
   
-  function retourner() 
-  {
-    window.location.href = '../signIn/compte_etudiant.php';
-  }
+  var retournerButton = document.getElementById('retourner');
+
+    // Ajouter un gestionnaire d'événements pour le clic
+    retournerButton.addEventListener('click', function() {
+        window.location.href = '../signIn/compte_etudiant.php';
+    });
   const alertParam = '<?php echo isset($_SESSION['alert']) ? $_SESSION['alert'] : ''; ?>';
 
     // Afficher l'alerte correspondante

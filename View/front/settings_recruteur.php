@@ -87,74 +87,28 @@
 </form>
 </body>
 <script>
-  function retourner() 
-  {
+  var retournerButton = document.getElementById('retourner');
+
+// Ajouter un gestionnaire d'événements pour le clic
+retournerButton.addEventListener('click', function() {
     window.location.href = '../signIn/compte_recruteur.php';
-  }
-  document.getElementById('retourner').addEventListener('click',retourner);
-  function updatePassword() 
-  {
-    var currentPasswordElement = document.getElementById('currentPalssword');
-    var newPasswordElement = document.getElementById('newPassword');
-
-    if (currentPasswordElement && newPasswordElement) {
-      var currentPassword = currentPasswordElement.value;
-      var newPassword = newPasswordElement.value;
-
-      // Effectuer la requête AJAX
-      fetch('setting_recruteur.php?pwd=' + encodeURIComponent(currentPassword) + '&newPassword=' + newPassword, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
-      .then(response => response.text())
-      .then(data => {
-        console.log('Server response:',data);
-
-        if (data.includes('Password changed successfully')) {
-          alert('Password updated successfully');
-          window.location.href = 'settings_recruteur.php';
-        } 
-        else if (data.includes('Failed to update password'))
-        {
-          alert('Failed to update password');
-          window.location.href = 'settings_recruteur.php';
-        }
-        else if (data.includes('Wrong password'))
-        {
-          alert('Wrong password');
-          window.location.href = 'settings_recruteur.php';
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    } else {
-      console.error('One or both elements not found');
-    }
-  }
-  document.getElementById("deleteAccountBtn").addEventListener("click", function() {
-  fetch('desableaccount.php', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  })
-  .then(response => response.text())
-  .then(data => {
-    console.log('Server response:', data);
-
-    if (data.includes('Le compte a été désactivé avec succès.')) {
-      alert('Le compte a été désactivé avec succès.');
-      window.location.href = '../front/front_office.html';
-    } else {
-      alert("Une erreur s'est produite lors de la désactivation du compte.");
-    }
-  });
 });
+  const alertParam = '<?php echo isset($_SESSION['alert']) ? $_SESSION['alert'] : ''; ?>';
 
+    // Afficher l'alerte correspondante
+    if (alertParam === 'success') {
+        alert('Password changed successfully');
+    } else if (alertParam === 'failure') {
+        alert('Failed to update password');
+    } else if (alertParam === 'wrongpassword') {
+        alert('Wrong password');
+    }else if (alertParam === 'passwordmismatch') {
+        alert('Password and confirmation do not match');
+    }else if (alertParam === 'usernotfound') {
+        alert('User not found');
+    }
 
-   </script>
+    // Effacer le message d'alerte de la session
+    <?php unset($_SESSION['alert']); ?>
 </script>
 </html>
