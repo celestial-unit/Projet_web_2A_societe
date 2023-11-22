@@ -9,11 +9,11 @@ if($user!=false)
 {
     if ($personne->desableaccount($emailToDisable, $pdo)) 
     {
-        echo "L'utilisateur a été disabled avec succès.";
+        echo "Account disabled successfully.";
     } 
 }
 else 
 {
-    echo "L'utilisateur n'existe pas ";
+    echo "User does not exist";
 }
 ?>
