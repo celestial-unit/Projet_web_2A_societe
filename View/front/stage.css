@@ -1,0 +1,174 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    background-color: #c15f26;
+    color: white;
+    padding: 1.2rem;
+    text-align: center;
+    min-height: 30vh;
+}
+
+header h2 {
+    font-size: 1.2rem;
+}
+
+header p {
+    font-size: 0.9rem;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    text-align: center;
+    width: 95%;
+    padding: 20px;
+}
+
+.container .form-control {
+    margin: 10px 0;
+    width: 100%;
+    position: relative;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+.container .form-control .label {
+    color: rgb(217, 217, 23);
+    background-color: white;
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 0.8rem;
+    padding: 0 5px;
+    z-index: 1;
+}
+
+.container .form-control input,
+.container .form-control select,
+.container .form-control textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #f0f0f0;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #452003 !important;
+}
+
+#textarea-container {
+    text-align: left;
+    position: relative;
+    width: 100%;
+}
+
+.container textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 2px solid #f0f0f0;
+    border-radius: 5px;
+}
+
+button {
+    background-color: rgb(171, 140, 102);
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.container .form-control input[type="checkbox"] {
+    width: fit-content;
+}
+
+.container .form-control.least label {
+    visibility: visible;
+    font-size: 0.8em;
+}
+
+.form-control small {
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+}
+
+.form-control i.fa-circle-exclamation {
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.form-control.error small {
+    color: #e74c3c;
+    visibility: visible;
+    bottom: -2px;
+}
+
+.form-control.error i.fa-circle-exclamation {
+    color: #e74c3c;
+    visibility: visible;
+}
+
+@media (min-width: 450px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media (min-width: 700px) {
+    header {
+        font-size: 1rem;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    .container .form-control {
+        margin: 10px 0;
+        width: 46%;
+        display: inline-block;
+    }
+
+    #textarea-container {
+        width: 45%;
+        left: 20px;
+    }
+}
+
+@media (min-width: 900px) {
+    .container {
+        width: 70%;
+    }
+
+    .container .form-control {
+        margin: 10px 0;
+        width: 46%;
+        display: inline-block;
+    }
+
+    #textarea-container {
+        width: 45%;
+        left: 29px;
+    }
+}
