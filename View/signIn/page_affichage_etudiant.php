@@ -54,7 +54,7 @@ $personne->setValuesFromSession();
     </div>
     <div>
     <button id="editAccountBtn">edit account</button>
-    <button id="deleteAccountBtn">delete account</button>
+    <button onclick=confirmDeactivation()>delete account</button>
     </div>
 </body>
 <script>
@@ -62,26 +62,47 @@ $personne->setValuesFromSession();
    {
 	window.location.href = "compte_etudiant.php";
    }
-   
-   document.getElementById("deleteAccountBtn").addEventListener("click", function() {
-  fetch('desableaccount.php', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  })
-  .then(response => response.text())
-  .then(data => {
-    console.log('Server response:', data);
 
-    if (data.includes('Le compte a été désactivé avec succès.')) {
-      alert('Le compte a été désactivé avec succès.');
-      window.location.href = '../front/front_office.html';
-    } else {
-      alert("Une erreur s'est produite lors de la désactivation du compte.");
-    }
-  });
+   document.getElementById("deleteAccountBtn").addEventListener("click", function() {
+    confirmDeactivation();
 });
+   function deactivateAccountAndRedirect()
+   {
+      fetch('desableaccount.php', 
+      {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+      })
+          .then(response => response.text())
+          .then(data => {
+            console.log('Server response:', data);
+
+            if (data.includes('Le compte a été désactivé avec succès.')) 
+            {
+              alert('Le compte a été désactivé avec succès.');
+              window.location.href = '../front/front_office.html';
+            } else
+            {
+              alert("Une erreur s'est produite lors de la désactivation du compte.");
+            }
+          });
+    }
+
+function confirmDeactivation() 
+{
+    var userResponse = prompt("Voulez-vous vraiment désactiver votre compte ? Tapez 'Oui' pour confirmer.");
+
+    if (userResponse !== null && userResponse.toLowerCase() === 'oui') 
+    {
+        deactivateAccountAndRedirect();
+    } else 
+    {
+        // L'utilisateur a tapé autre chose ou a annulé, aucune action n'est nécessaire
+    }
+}
+
 
 var editAccountBtn = document.getElementById("editAccountBtn");
     editAccountBtn.addEventListener("click", function() {
