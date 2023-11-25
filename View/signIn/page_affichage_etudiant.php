@@ -85,7 +85,7 @@ $personne->setValuesFromSession();
 
 var editAccountBtn = document.getElementById("editAccountBtn");
     editAccountBtn.addEventListener("click", function() {
-        window.location.href = "formsuppetudiant.html"; 
+        window.location.href = "formsuppetudiant.php"; 
     });
    </script>
 </html>

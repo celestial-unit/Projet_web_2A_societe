@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $diplome = $_GET['diploma'];
     $cin = $_GET['cin'];
     $num = $_GET['num'];
+    $newemail= $_GET['email'];
 
 
     
@@ -27,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $_SESSION['user']['Diplome'] = $diplome;
     $_SESSION['user']['Niveau'] = $level;
     $_SESSION['user']['cin'] = $cin;
+    $_SESSION['user']['Email'] = $newemail;
 
     $personne->Nom=$firstName;
     $personne->Prenom=$lastName;
@@ -49,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             Age = '$age',
             Tel = '$num',
             Niveau = '$level',
-            Diplome = '$diplome'
+            Diplome = '$diplome',
+            Email='$newemail'
             WHERE Email = '$email'";
         $pdo->query($updateUserQuery);
     } else 

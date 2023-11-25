@@ -426,7 +426,7 @@ function verifierProfil()
         {
             window.location.href = 'page_affichage_etudiant.php';
         } else {
-            window.location.href = 'formsuppetudiant.html';
+            window.location.href = 'formsuppetudiant.php';
         }
     }
 
