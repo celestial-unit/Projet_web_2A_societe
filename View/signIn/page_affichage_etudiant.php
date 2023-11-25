@@ -58,6 +58,10 @@ $personne->setValuesFromSession();
     </div>
 </body>
 <script>
+  var editAccountBtn = document.getElementById("editAccountBtn");
+    editAccountBtn.addEventListener("click", function() {
+        window.location.href = "formsuppetudiant.php"; 
+    });
    function redirectToMainPage() 
    {
 	window.location.href = "compte_etudiant.php";
@@ -104,9 +108,6 @@ function confirmDeactivation()
 }
 
 
-var editAccountBtn = document.getElementById("editAccountBtn");
-    editAccountBtn.addEventListener("click", function() {
-        window.location.href = "formsuppetudiant.php"; 
-    });
+
    </script>
 </html>
