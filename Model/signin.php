@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
                 header('Location: ../View/SignIn/compte_etudiant.php');
                 exit();
             } 
-            else if ($_SESSION['recruteur']['Role'] === 'recruteur')
+            else if ($_SESSION['recruteur']['Role'] === 'recruteur'  && $recruteur['Status']==='Abled')
             {
                 header('Location: ../View/SignIn/compte_recruteur.php');
                 exit();

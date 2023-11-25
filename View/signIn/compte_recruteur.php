@@ -79,7 +79,7 @@ echo '</script>';
                     </a>
                 </li>
                 <li>
-                    <a href="desableaccount.php">
+                    <a>
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -345,6 +345,21 @@ function verifierProfil()
 document.getElementById('profileLink1').addEventListener('click', verifierProfil);
 
 document.getElementById("delete").addEventListener("click", function() {
+confirmDeactivation()});
+function confirmDeactivation() 
+{
+    var userResponse = prompt("Voulez-vous vraiment désactiver votre compte ? Tapez 'Oui' pour confirmer.");
+
+    if (userResponse !== null && userResponse.toLowerCase() === 'oui') 
+    {
+        deactivateAccountAndRedirect();
+    } else 
+    {
+        // L'utilisateur a tapé autre chose ou a annulé, aucune action n'est nécessaire
+    }
+}
+function deactivateAccountAndRedirect()
+{
   fetch('desableaccount.php', {
     method: 'GET',
     headers: {
@@ -362,6 +377,6 @@ document.getElementById("delete").addEventListener("click", function() {
       alert("Une erreur s'est produite lors de la désactivation du compte.");
     }
   });
-});
+}
 </script>
 </html>
