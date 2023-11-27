@@ -28,12 +28,12 @@ if (!$user) {
     try {
         // Paramètres du serveur SMTP de Gmail
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       ='smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'unipath913@gmail.com'; // Adresse e-mail depuis laquelle vous envoyez l'e-mail
-        $mail->Password   = 'UNIPATH2023'; // Mot de passe de l'adresse e-mail Gmail
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Username   ='unipath913@gmail.com'; // Adresse e-mail depuis laquelle vous envoyez l'e-mail
+        $mail->Password   ='UNIPATH2023'; // Mot de passe de l'adresse e-mail Gmail
+        $mail->SMTPSecure =PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       =587;
 
        // Paramètres de l'e-mail
         $mail->setFrom('unipath913@gmail.com','unipath');

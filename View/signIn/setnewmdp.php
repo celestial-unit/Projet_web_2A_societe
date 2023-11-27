@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="profile-settings-holder">
-            <form class="form-horizontal profile-update" action="../../Model/mdp.php" method='get'>
+            <form class="form-horizontal profile-update" action="../../Model/mdp.php" method='get' onsubmit="return updatePassword()">
                 <div>
                 <label for="profile_password">Enter your email</label>
                 <span class="text-helper">Enter your email </span>
@@ -42,7 +42,7 @@
                 </div>
               </div>
               <div class="form-btns clearfix">
-                <input class="btn btn-primary" type="submit" onclick="updatePassword()" value="Update Password">
+                <input class="btn btn-primary" type="submit" value="Update Password">
               </div>
             </form>
           </div>
@@ -53,20 +53,27 @@
 </body>
 <script>
   function updatePassword() {
-    var newPasswordElement = document.getElementById('newPassword');
-    var confirmPasswordElement = document.getElementById('profile_password_confirm');
-    var pwdvalue = document.getElementById('newPassword').value;
-    var email=document.getElementById('email');
-    var emailValue = email.value.trim();
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (newPasswordElement.value !== confirmPasswordElement.value) {
-      alert("Enter correctly your newPassword");
+        var newPasswordElement = document.getElementById('newPassword');
+        var confirmPasswordElement = document.getElementById('profile_password_confirm');
+        var pwdvalue = document.getElementById('newPassword').value;
+        var email = document.getElementById('email');
+        var emailValue = email.value.trim();
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (newPasswordElement.value !== confirmPasswordElement.value) {
+            alert("Enter correctly your newPassword");
+            return false; // empêcher la soumission du formulaire
+        }
+        if (emailValue === "") {
+            alert("Veuillez saisir votre adresse e-mail.");
+            return false; // empêcher la soumission du formulaire
+        } else if (!emailRegex.test(emailValue)) {
+            alert("Veuillez saisir une adresse e-mail valide.");
+            return false; // empêcher la soumission du formulaire
+        }
+
+        // Si toutes les conditions sont satisfaites, le formulaire peut être soumis
+        return true;
     }
-    if (emailValue === "") {
-        alert("Veuillez saisir votre adresse e-mail.");
-    } else if (!emailRegex.test(emailValue)) {
-        alert("Veuillez saisir une adresse e-mail valide.");
-  }
-}
-</script>
+    </script>
 </html>
