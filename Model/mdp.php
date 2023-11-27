@@ -52,7 +52,7 @@ if (!$user) {
         exit();
     } catch (Exception $e) {
         echo "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
-        header('../View/signIn/setnewmdp.php');
+       // header('../View/signIn/setnewmdp.php');
     }
     
 }
