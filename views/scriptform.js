@@ -1,6 +1,6 @@
 //document.addEventListener("DOMContentLoaded", function(event){
- // });
-  function switchpage()
+ // })*/
+  /*function switchpage()
 {
     var b = document.getElementById("save");
     b.addEventListener("save", function (e) {
@@ -15,20 +15,34 @@ function switchpage1()
         e.preventDefault();
         header('Location: newcrudview.php');
     });
-}
-var form= document.getElementById("survey-form");
-var date=document.getElementById("datedebut");
-function validateDate ()
-{
-    var inputDate = new Date(document.getElementById("datedebut").value);
-    var currentDate = new Date();
-    if (inputDate < currentDate) {
-        alert("la date doit etre supreieur a la date d'aujourd'hui");
-        dateerreur.innerHTML="la date doit etre supreieur a la date d'aujourd'hui";
-    } 
-}
-email.addEventListener("keyup",function(e)
-{
-    e.preventDefault();
-    validateDate();
+}*/
+document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("survey-form");
+    var dateInput = document.getElementById("datedebut");
+    var dateErreur = document.getElementById("dateerreur");
+
+    function validateDate() {
+        var inputDate = new Date(dateInput.value);
+        var currentDate = new Date();
+
+        if (inputDate < currentDate) {
+            alert("La date doit être supérieure à la date d'aujourd'hui");
+            dateErreur.innerHTML = "La date doit être supérieure à la date d'aujourd'hui";
+        } else {
+            dateErreur.innerHTML = ""; // Efface le message d'erreur s'il n'y a pas d'erreur
+        }
+    }
+
+    dateInput.addEventListener("change", function() {
+        validateDate();
+    });
+    form.addEventListener("submit", function(e) {
+        // Ajoutez ici d'autres validations si nécessaire
+        validateDate();
+
+        // Empêche la soumission du formulaire si la validation échoue
+        if (dateErreur.innerHTML !== "") {
+            e.preventDefault();
+        }
+    });
 });

@@ -133,5 +133,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </form>
 </body>
 <script src="./scriptform.js"></script>
-
 </html>
