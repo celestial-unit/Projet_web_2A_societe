@@ -1,0 +1,303 @@
+/* ==========================================================================
+    RESET
+    ========================================================================== */
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}body {line-height: 1;}ol, ul {list-style: none;}blockquote, q {quotes: none;}blockquote:before, blockquote:after, q:before, q:after {content: '';content: none;}table {border-collapse: collapse;border-spacing: 0;}
+    /* ==========================================================================
+        GENERAL
+        ========================================================================== */
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        font-family: "Roboto", sans-serif;
+        font-size:16px;
+        background:#eeeeee;
+        color:#222222;
+        line-height: 1.2;
+    }
+    .clear{
+        clear: both;
+    }
+    .flex{
+        display:flex;
+        justify-content: space-between;
+        flex-wrap:wrap;
+    }
+    a,
+    a:visited,
+    a:hover,
+    a:focus{
+        text-decoration:none;
+        color:inherit;
+    }
+    /* ==========================================================================
+        LAYOUT
+        ========================================================================== */
+    .container{
+        width:1400px;
+        margin:80px auto;
+    }
+    .container .card{
+        width:19%;
+        margin-bottom: 20px;
+        background:#ffffff;
+    }
+    
+    /* ==========================================================================
+        CARDS
+        ========================================================================== */
+    .manipulation-listing .container{
+    
+    }
+    /*PICTURE*/
+    .card{
+        border:1px solid #dddddd;
+        border-radius:5px;
+        position:relative;
+    }
+    .card .card-picture{
+        width: 100%;
+        overflow:hidden;
+        position:relative;
+        cursor:pointer;
+    }
+    
+    .card .card-picture:after {
+        content: "";
+        display: block;
+        padding-bottom:70%;
+    }
+    .card .card-picture img.bg{
+        width:150%;
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        transition:all 5s linear;
+    }
+    .card:hover .card-picture img.bg{
+        width:130%;
+        top:55%;
+        left:55%;
+        transition:all 5s linear;
+    }
+    /*CONTENT*/
+    .card .card-content{
+        padding: 15px 15px 30px 15px;
+        position:relative;
+    }
+    .card .card-content h2{
+        color: #866d42;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 1.2;
+        margin-bottom: 10px;
+        cursor:pointer;
+    }
+    .card .card-content ul{
+        list-style-type: square;
+        padding-left: 18px;
+        margin-bottom: 10px;
+        line-height:1.2;
+        color:#111111;
+    }
+    .card .card-content p{
+        margin-bottom: 10px;
+    }
+    .card .manip-type{
+        font-size: 12px;
+        font-style: italic;
+        position:absolute;
+        bottom:10px;
+        left:15px;
+    }
+    .card .card-text{
+      overflow: hidden;
+      transition: all .5s ease-in-out;
+      line-height: 0;
+      color: transparent;
+    }
+    .card .card-text.active{
+      line-height: 1.2;
+      color: black;
+    }
+    /*SECURITE*/
+    .card .card-text .info-securite{
+        color: transparent;
+    }
+    .card .card-text.active .info-securite{
+        color: #721c24;
+    }
+    .card .card-text .info-securite h3{
+        text-transform:uppercase;
+        color:transparent;
+        font-weight:bold;
+    }
+    .card .card-text.active .info-securite h3{
+        color:#f17373;
+        margin-bottom: 10px;
+    }
+    .card .card-text .info-securite p{
+        color:transparent;
+        margin-bottom:0;
+    }
+    .card .card-text.active .info-securite p{
+        color:#f17373;
+        margin-bottom:20px;
+    }
+    /*TOOLTIP*/
+    .tooltip {
+        position: absolute;
+        top:10px;
+        right:10px;
+        width:35px;
+        height:35px;
+        background:url("data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyBmaWxsPSIjZmU3MTcxIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI2NHB4IiBoZWlnaHQ9IjY0cHgiIHZpZXdCb3g9Ii00Ny44MSAtNDcuODEgNTczLjc1IDU3My43NSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgc3Ryb2tlPSIjZmU3MTcxIj4KDTxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIi8+Cg08ZyBpZD0iU1ZHUmVwb190cmFjZXJDYXJyaWVyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZT0iI0NDQ0NDQyIgc3Ryb2tlLXdpZHRoPSIyLjg2ODc1Ii8+Cg08ZyBpZD0iU1ZHUmVwb19pY29uQ2FycmllciI+IDxnPiA8Zz4gPGc+IDxjaXJjbGUgY3g9IjIzOS45MDQiIGN5PSIzMTQuNzIxIiByPSIzNS44NzgiLz4gPHBhdGggZD0iTTI1Ni42NTcsMTI3LjUyNWgtMzEuOWMtMTAuNTU3LDAtMTkuMTI1LDguNjQ1LTE5LjEyNSwxOS4xMjV2MTAxLjk3NWMwLDEwLjQ4LDguNjQ1LDE5LjEyNSwxOS4xMjUsMTkuMTI1aDMxLjkgYzEwLjQ4LDAsMTkuMTI1LTguNjQ1LDE5LjEyNS0xOS4xMjVWMTQ2LjY1QzI3NS43ODIsMTM2LjE3LDI2Ny4xMzgsMTI3LjUyNSwyNTYuNjU3LDEyNy41MjV6Ii8+IDxwYXRoIGQ9Ik0yMzkuMDYyLDBDMTA2Ljk0NywwLDAsMTA2Ljk0NywwLDIzOS4wNjJzMTA2Ljk0NywyMzkuMDYyLDIzOS4wNjIsMjM5LjA2MmMxMzIuMTE1LDAsMjM5LjA2Mi0xMDYuOTQ3LDIzOS4wNjItMjM5LjA2MiBTMzcxLjE3OCwwLDIzOS4wNjIsMHogTTIzOS4yOTIsNDA5LjczNGMtOTQuMTcxLDAtMTcwLjU5NS03Ni4zNDgtMTcwLjU5NS0xNzAuNTk2YzAtOTQuMjQ4LDc2LjM0Ny0xNzAuNTk1LDE3MC41OTUtMTcwLjU5NSBzMTcwLjU5NSw3Ni4zNDcsMTcwLjU5NSwxNzAuNTk1QzQwOS44ODcsMzMzLjM4NywzMzMuNDY0LDQwOS43MzQsMjM5LjI5Miw0MDkuNzM0eiIvPiA8L2c+IDwvZz4gPC9nPiA8L2c+Cg08L3N2Zz4=") no-repeat center center;
+        background-size:cover;
+        cursor:pointer;
+    }
+    .tooltip .tooltip-text {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 1;
+        top: -7px;
+        left: 39px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .tooltip .tooltip-text::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent #555 transparent transparent;
+    }
+    .tooltip:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    /*BUTTON*/
+    .card button{
+        width: 35px;
+        height: 35px;
+        border-radius: 35px;
+        background: rgb(214, 151, 112);
+        border: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transform:translateY(0);
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+    }
+    .card button:before{
+        content:'';
+        display:block;
+        width:10px;
+        height:2px;
+        background:#ffffff;
+        transform:rotate(45deg);
+        position:absolute;
+        top:17px;
+        left:9px;
+        transition: all .5s ease-in-out;
+    }
+    .card button:after{
+        content: '';
+        display: block;
+        width: 10px;
+        height: 2px;
+        background: #ffffff;
+        transform: rotate(-45deg);
+        position: absolute;
+        top: 17px;
+        right: 9px;
+        transition: all .5s ease-in-out;
+    }
+    .card button:hover{
+        transform:translateY(-2px);
+        transition: all .5s ease-in-out;
+        box-shadow: 1px 4px 5px 0px rgba(0,0,0,0.30);
+    }
+    .card button.active{
+        background:#f17373;
+        transform:translateY(-2px);
+        transition: all .5s ease-in-out;
+        box-shadow: 1px 4px 5px 0px rgba(0,0,0,0.30);
+    }
+    .card button.active:before{
+        left:13px;
+        transition: all .5s ease-in-out;
+    }
+    .card button.active:after{
+        right:12px;
+        transition: all .5s ease-in-out;
+    }
+    /* ==========================================================================
+        RESPONSIVE
+        ========================================================================== */
+    
+    /* ==========================================================================
+        MODAL
+        ========================================================================== */
+    .modal-container {
+      background-color:  rgba(0,0,0, 0.6);
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    
+    .modal-container.show-modal {
+      display: block;
+    }
+    
+    .modal {
+        background-color: white;
+        border-radius: 3px;
+        box-shadow: 0, 0, 10px rgba(0,0,0, 0.3);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+        max-width: 100%;
+        width: 300px;
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+    .modal h3{
+        text-transform:uppercase;
+        margin-bottom: 10px;
+    }
+    .close-btn {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      right: 0;
+    }
+    @media (max-width: 1199.98px) {
+        
+    }
+    @media (max-width: 991.98px) {
+    
+    }
+    @media (max-width: 767.98px) {
+        
+    }
+    @media (max-width: 575.98px) {
+        
+    }
