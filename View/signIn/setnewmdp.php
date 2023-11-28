@@ -65,10 +65,10 @@
             return false; // empêcher la soumission du formulaire
         }
         if (emailValue === "") {
-            alert("Veuillez saisir votre adresse e-mail.");
+            alert("Enter your e-mail.");
             return false; // empêcher la soumission du formulaire
         } else if (!emailRegex.test(emailValue)) {
-            alert("Veuillez saisir une adresse e-mail valide.");
+            alert("Enter correctly your e-mail .");
             return false; // empêcher la soumission du formulaire
         }
 

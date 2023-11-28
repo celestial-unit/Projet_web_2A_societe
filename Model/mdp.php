@@ -19,9 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 $user = $personne->getUserByEmail($email, $pdo);
 
-if (!$user) {
+if (!$user) 
+{
     // Si l'utilisateur n'existe pas, afficher une alerte
     echo '<script>alert("Compte inexistant");</script>';
+    header('Location: mdp.php');
+    exit();
 } else 
 {
     $personne->updatePassword($email,$pwd,$pdo);
@@ -30,25 +33,28 @@ if (!$user) {
         $mail->isSMTP();
         $mail->Host       ='smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   ='unipath913@gmail.com'; // Adresse e-mail depuis laquelle vous envoyez l'e-mail
-        $mail->Password   ='UNIPATH2023'; // Mot de passe de l'adresse e-mail Gmail
+        $mail->Username   ='celia.marrakchi@esprit.tn'; // Adresse e-mail depuis laquelle vous envoyez l'e-mail
+        $mail->Password   ='221JFT3297'; // Mot de passe de l'adresse e-mail Gmail
         $mail->SMTPSecure =PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       =587;
 
        // Paramètres de l'e-mail
-        $mail->setFrom('unipath913@gmail.com','unipath');
+        $mail->setFrom('celia.marrakchi@esprit.tn','unipath');
         $mail->addAddress($email); // Adresse e-mail du destinataire
-        $mail->Subject = 'Mail de verification';
-        $mail->Body    = 'Vous avez changé le mdp de votre compte a unipathc';
+        $mail->Subject = 'Password Change Verification';
+        $mail->isHTML(true);
+$mail->Body = 'Hello ' . $user['Nom'] . ',<br>&nbsp;' .
+    'Your password for your Unipath account has been changed successfully. If you did not initiate this change, please contact our support team immediately.<br>&nbsp;' .
+    'Best regards,<br>&nbsp;Unipath Team';
         
         
 
         // Envoyer l'e-mail
         $mail->send();
-        echo 'E-mail envoyé avec succès';
 
-        // Rediriger l'utilisateur vers une autre page après l'envoi de l'e-mail
-       // header('Location: autre_page.php');
+        echo 'E-mail envoyé avec succès';
+        echo '<script>alert("E-mail envoyé avec succès");</script>';
+        echo '<script>window.location.href = "../View/signIn/signIn.html";</script>';
         exit();
     } catch (Exception $e) {
         echo "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
