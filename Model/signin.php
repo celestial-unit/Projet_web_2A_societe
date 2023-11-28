@@ -3,6 +3,8 @@
 session_start();
 
 include("../Controller/sign.php");
+include("../Model/authenticate.php"); // Incluez le modèle d'authentification
+
 
 $personne = new Personne();
 $conn = new config();
@@ -55,6 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
                 'Status' => $recruteur['Status']
             );
 
+            /*jwt
+            $userToken = generateJWT($userInfo);
+            // Stockez le token dans la session ou renvoyez-le au client, selon vos besoins
+            $_SESSION['jwtUserToken'] = $userToken;*/
+
             if ($_SESSION['user']['Role'] === 'etudiant' && $user['Status']==='Abled') 
             {
                 header('Location: ../View/SignIn/compte_etudiant.php');
@@ -83,5 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     
     }
 }
+
+
     
 ?>

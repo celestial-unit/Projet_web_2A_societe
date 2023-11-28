@@ -1,6 +1,45 @@
+
+
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
+const email=document.getElementById("email").value;
+const pwd=document.getElementById("pwd").value;
+//authentification
+/*
+const store = {};
+store.setJWT = function (data) {
+    this.JWT = data;
+  };
+
+
+  loginForm.addEventListener('submit', async (e) => { // Mise à jour ici
+    e.preventDefault();
+
+    const res = await fetch('../../Model/authenticate.php', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            username: email,
+            password: pwd,
+        })
+    });
+
+    if (res.status >= 200 && res.status <= 299) {
+        const jwt = await res.text();
+        store.setJWT(jwt);
+        loginForm.style.display = 'none';
+        //btnGetResource.style.display = 'block';
+    } else {
+        // Handle errors
+        console.log(res.status, res.statusText);
+    }
+});
+*/
+
+
 
 signUpButton.addEventListener('click', () => {
 	container.classList.add("right-panel-active");
