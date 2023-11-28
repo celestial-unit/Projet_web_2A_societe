@@ -21,7 +21,7 @@ $tab=$fc->affichertypeFormation();
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Manage <b>tranings</b></h2>
+          <h2>Manage type of <b>tranings</b></h2>
         </div>
         <div class="col-sm-6">
         <a href="addtypeformation.php" class="btn btn-success" target="_blank">

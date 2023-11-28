@@ -10,17 +10,32 @@ $allFormations = $formationController->getAllFormations();
   <title>Recommended Trainings</title>
   <link rel="stylesheet" href="./perfect.css">
   <style>
-        .container.flex {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between; /* ou une autre valeur selon votre préférence */
-        }
+    .container.flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
 
-        .card {
-            /* Ajoutez le style nécessaire pour chaque carte ici */
-            margin-bottom: 20px; /* Espace entre les cartes */
-        }
-    </style>
+    .card {
+        margin: 0px; /* Ajustez cette valeur selon vos besoins pour rapprocher les cartes */
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        width: 300px;
+    }
+
+    .card-picture img {
+        max-width: 100%;
+    }
+
+    .card-content {
+        padding: 30px;
+    }
+</style>
+
+
+
+
+
 </head>
 <body>
 <?php foreach ($allFormations as $formationn) { ?>
@@ -53,6 +68,8 @@ $allFormations = $formationController->getAllFormations();
 
 <!-- partial -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script  src="./perfect.js"></script>
 </body>
 </html>
 <?php

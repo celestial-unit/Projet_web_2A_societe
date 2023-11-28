@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     } else {
         // Afficher le message de confirmation avec un formulaire
         echo '<script>
-                var confirmation = confirm("Voulez-vous vraiment supprimer cette formation ?");
+                var confirmation = confirm("Voulez-vous vraiment supprimer ce type de formation ?");
                 if (confirmation) {
                     // Rediriger vers la même page avec la confirmation
                     window.location.href = "supprimertf.php?id=' . $_GET['id'] . '&confirmation=oui";

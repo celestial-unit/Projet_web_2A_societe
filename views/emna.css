@@ -274,12 +274,14 @@ body {
   display: none;
 }
 
+
 #formations-list {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around; /* Ou utilisez space-evenly */
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around; /* Ou utilisez space-evenly */
 }
+
 #formations-list > div {
-    margin-right: 5px; /* Ajustez la marge à droite entre les éléments */
-    margin-left: 5px; /* Ajustez la marge à gauche entre les éléments */
+  margin-right: 2px; /* Ajustez la marge à droite entre les éléments */
+  margin-left: 2px; /* Ajustez la marge à gauche entre les éléments */
 }

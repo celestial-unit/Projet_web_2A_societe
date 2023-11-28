@@ -76,7 +76,7 @@ if (isset($_GET['id'])) {
                 <!-- Description input -->
                 <div class="survey-element" id="survey-name">
                     <label for="description">Description:</label>
-                    <input type="text" name="description" id="description" value="<?php echo $typeoftraining['description']; ?>">
+                    <textarea id="description" name="description" rows="7"><?php echo $typeoftraining['description']; ?></textarea>
                 </div>
 
                 <!-- Submit and reset buttons -->

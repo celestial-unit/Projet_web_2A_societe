@@ -34,7 +34,6 @@
         <label class="filter__button" for="weekendclasses">Weekend classes</label>
     </div>
 </div>
-
 <div id="formations-list"></div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="emna.js"></script>

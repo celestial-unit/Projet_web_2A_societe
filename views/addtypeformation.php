@@ -34,7 +34,6 @@ if (isset($_POST["domaine"]) && isset($_POST["description"])) {
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<body id="main">
 
   <header>
     <div class="survey-header">
@@ -46,7 +45,6 @@ if (isset($_POST["domaine"]) && isset($_POST["description"])) {
   <main>
     <div class="survey-container">
       <form id="survey-form" method="POST" >
-
         <!--         for name -->
         <div class="survey-element" id="survey-name">
           <label for="name" >Domaine</label>
@@ -55,8 +53,9 @@ if (isset($_POST["domaine"]) && isset($_POST["description"])) {
 
         <div class="survey-element" id="survey-name">
         <label for="description">Description:</label>
-        <input type="text" name="description" id="description">
+        <textarea id="description" name="description" rows="7"></textarea>
        </div>
+
        <div class="survey-element" id="survey-name" align="center" >
        <input type="submit" value="Save" id="save">
        <input type="reset" value="Reset">
