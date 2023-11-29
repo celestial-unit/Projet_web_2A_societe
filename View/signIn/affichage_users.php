@@ -38,7 +38,7 @@ include("../../Controller/sign.php");
         }
 
         th, td {
-            padding: 12px;
+            padding: 6px;
             text-align: left;
             font-size: 14px; /* Taille de police */
             color: #634b35; /* Couleur du texte (marron foncé) */
@@ -104,8 +104,8 @@ include("../../Controller/sign.php");
 
 <body>
 <h1>Users List</h1>
-<div class="action-buttons">
-    <button class="return" id="return">Return</button>
+    <div class="action-buttons">
+        <button class="return" id="return">Return</button>
         <button class="add" id="add">Add/edit User</button>
         <button class="delete" id="delete">Delete User</button>
         <button class="disable" id="disable">Disable Account</button>
