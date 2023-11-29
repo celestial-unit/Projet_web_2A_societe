@@ -33,13 +33,13 @@ if (!$user)
         $mail->isSMTP();
         $mail->Host       ='smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   ='celia.marrakchi@esprit.tn'; // Adresse e-mail depuis laquelle vous envoyez l'e-mail
-        $mail->Password   ='221JFT3297'; // Mot de passe de l'adresse e-mail Gmail
+        $mail->Username   ='marrakchicelia3@gmail.com'; // Adresse e-mail depuis laquelle vous envoyez l'e-mail
+        $mail->Password   ='msdi xnvj mvhq gebx'; // Mot de passe de l'adresse e-mail Gmail
         $mail->SMTPSecure =PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       =587;
 
        // Paramètres de l'e-mail
-        $mail->setFrom('celia.marrakchi@esprit.tn','unipath');
+        $mail->setFrom('marrakchicelia3@gmail.com','unipath');
         $mail->addAddress($email); // Adresse e-mail du destinataire
         $mail->Subject = 'Password Change Verification';
         $mail->isHTML(true);
