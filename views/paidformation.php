@@ -11,15 +11,24 @@ $paidFormations = $formationController->getPaidFormations();
   <link rel="stylesheet" href="./perfect.css">
   <style>
         .container.flex {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between; /* ou une autre valeur selon votre préférence */
-        }
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .card {
+        margin: 0px; /* Ajustez cette valeur selon vos besoins pour rapprocher les cartes */
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        width: 300px;
+    }
 
-        .card {
-            /* Ajoutez le style nécessaire pour chaque carte ici */
-            margin-bottom: 20px; /* Espace entre les cartes */
-        }
+    .card-picture img {
+        max-width: 100%;
+    }
+
+    .card-content {
+        padding: 30px;
+    }
     </style>
 </head>
 <body>
