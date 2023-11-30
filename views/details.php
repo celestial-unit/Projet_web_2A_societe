@@ -11,49 +11,61 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Récupération du paramètre id de l'URL
-$id_formation = isset($_GET['id']) ? $_GET['id'] : '';
+// Récupérer le paramètre id de l'URL
+$id_formation = isset($_GET['id']) ? $_GET['id'] : 0;
 
-// Requête pour récupérer les informations de la formation et de la description
-$sql = "SELECT formation.*, typeformation.description
+// Requête pour récupérer les informations de la formation spécifique avec jointure
+$sql = "SELECT formation.*, typeformation.description, typeformation.domaine,formation.nbheures
         FROM formation
         LEFT JOIN typeformation ON formation.id_typeformation = typeformation.id_typeformation
         WHERE formation.id_formation = $id_formation";
 
 $result = $conn->query($sql);
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Barre de recherche CSS</title>
-    <link href='https://fonts.googleapis.com/css?family=Scada:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
-    <link rel="stylesheet" href="./details.css">
-</head>
-<body>
-<?php
-if ($result && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $nom_formation = $row['Nom'];
-    $description = $row['description'];
-    $image_url = $row['image_url'];
 
-    // Affichage de la description avec l'image
-    echo '<div class="card">';
-    echo '  <img src="' . $image_url . '" alt="' . $nom_formation . '">';
-    echo '  <div class="card__content">';
-    echo "    <h2>$nom_formation</h2>";
-    echo "    <p>Description : $description</p>";
-    echo '  </div>';
-    echo '</div>';
-} else {
-    echo "Aucune formation trouvée.";
+if (!$result) {
+    die("Erreur dans la requête : " . $conn->error);
 }
 
 $conn->close();
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+    <link rel="stylesheet" href="./details.css">
+</head>
+<body>
+    <div class="container">
+        <div id="slider-2" class="slider">
+            <div class="slider-wrapper">
+                <?php
+                // Vérifier si la requête a réussi avant de boucler
+                if ($result->num_rows > 0) {
+                    // Boucle à travers les résultats de la requête
+                    while ($row = $result->fetch_assoc()) {
+                        // Nouvelle diapositive pour chaque formation
+                        echo '<div class="slide">';
+                        // Incorporer les données de la base de données dans votre HTML
+                        echo '<div class="values-slider">';
+                        echo '<div class="values-column">';
+                        echo '<div class="spacer-xxxs desktop-hidden"></div>';
+                        echo '<h6>' . $row['Nom'] . '</h6>';
+                        echo '<h2>' . $row['description'] . '</h2>';
+                        echo '<div class="spacer-xxxs"></div>';
+                        echo '<p>' . $row['nbheures'] . '</p>';
+                        echo '</div>';
+                        echo '<div class="values-column-image"><img src="' . $row['image_url'] . '" loading="lazy" alt="" class="values-image"></div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo "Aucun résultat trouvé.";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
