@@ -456,7 +456,7 @@ document.getElementById('profileLink').addEventListener('click', verifierProfil)
 function timerIncrement() {
     idleTime = idleTime + 5;
     if (idleTime > 5) {  // 5 minutes d'inactivité
-        alert('Votre session a expiré. Veuillez vous reconnecter.');
+        alert('Your session has expired. Please log in again.');
         fetch('../../Model/logout.php')
             .then(response => {
                 if (response.ok) 

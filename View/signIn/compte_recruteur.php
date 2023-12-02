@@ -1,7 +1,24 @@
 <?php
 session_start();
-
+include("../../Model/authenticate.php");
+include("../../Controller/sign.php");
+$conn = new config();
+$pdo = $conn->getConnexion();
+$email = $_SESSION['recruteur']['Email']; // Assurez-vous que vous avez l'email de l'utilisateur
+$token = $_SESSION['reset_token']; // Assurez-vous que vous avez le token de réinitialisation
 // Définir une variable PHP en fonction des champs remplis
+$resultatVerification = verifierTokenReinitialisation($email,$pdo);
+//token non valide
+if (!$resultatVerification) 
+{
+    // Rediriger l'utilisateur vers la page de réinitialisation si le token n'est pas valide
+    header('Location: signIn.html');
+    echo "<script>alert('connection time expired');</script>";
+    exit();
+}
+//token valide 
+else
+{
 $champsRempli=(
     !empty($_SESSION['recruteur']['Nom'] )&&
     !empty($_SESSION['recruteur']['Prenom']) &&
@@ -16,6 +33,7 @@ $champsRempli=(
 echo '<script>';
 echo 'var champsRempli = ' . json_encode($champsRempli) . ';';
 echo '</script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -348,9 +366,9 @@ document.getElementById("delete").addEventListener("click", function() {
 confirmDeactivation()});
 function confirmDeactivation() 
 {
-    var userResponse = prompt("Voulez-vous vraiment désactiver votre compte ? Tapez 'Oui' pour confirmer.");
+    var userResponse = prompt("Are you sure you want to deactivate your account? Type 'yes' to confirm.");
 
-    if (userResponse !== null && userResponse.toLowerCase() === 'oui') 
+    if (userResponse !== null && userResponse.toLowerCase() === 'yes') 
     {
         deactivateAccountAndRedirect();
     } else 
@@ -371,12 +389,40 @@ function deactivateAccountAndRedirect()
     console.log('Server response:', data);
 
     if (data.includes('Le compte a été désactivé avec succès.')) {
-      alert('Le compte a été désactivé avec succès.');
+      alert('The account has been successfully deactivated.');
       window.location.href = '../front/front_office.html';
     } else {
       alert("Une erreur s'est produite lors de la désactivation du compte.");
     }
   });
 }
+
+//token 
+
+//token
+function timerIncrement() {
+    idleTime = idleTime + 5;
+    if (idleTime > 5) {  // 5 minutes d'inactivité
+        alert('Your session has expired. Please log in again.');
+        fetch('../../Model/logout.php')
+            .then(response => {
+                if (response.ok) 
+                {
+                    window.location.href = 'signIn.html';  // Redirection vers la page de connexion
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+}
+function resetIdleTime() 
+{
+    idleTime = 0;
+}
+
+let idleTime = 0;
+document.addEventListener('mousemove', resetIdleTime);
+document.addEventListener('keydown', resetIdleTime);
+// Appeler timerIncrement toutes les minutes (ou selon la fréquence souhaitée)
+setInterval(timerIncrement, 60000);  // 60000 millisecondes équivalent à 1 minute
 </script>
 </html>
