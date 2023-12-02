@@ -1,18 +1,24 @@
 <?php
 session_start();
 include("../../Model/authenticate.php");
+include("../../Controller/sign.php");
+$conn = new config();
+$pdo = $conn->getConnexion();
 $email = $_SESSION['user']['Email']; // Assurez-vous que vous avez l'email de l'utilisateur
 $token = $_SESSION['reset_token']; // Assurez-vous que vous avez le token de réinitialisation
 
-$resultatVerification = verifierTokenReinitialisation($email, $token);
-
+$resultatVerification = verifierTokenReinitialisation($email,$pdo);
+//token non valide
 if (!$resultatVerification) 
 {
     // Rediriger l'utilisateur vers la page de réinitialisation si le token n'est pas valide
     header('Location: signIn.html');
+    echo "<script>alert('connection time expired');</script>";
     exit();
 }
-
+//token valide 
+else
+{
 // Définir une variable PHP en fonction des champs remplis
 $champsRemplis = (
     !empty($_SESSION['user']['Nom']) &&
@@ -28,6 +34,7 @@ $champsRemplis = (
 echo '<script>';
 echo 'var champsRemplis = ' . json_encode($champsRemplis) . ';';
 echo '</script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -444,5 +451,32 @@ function verifierProfil()
 
     // Ajouter un gestionnaire d'événements au clic sur le lien du profil
 document.getElementById('profileLink').addEventListener('click', verifierProfil);
+
+//token
+function timerIncrement() {
+    idleTime = idleTime + 5;
+    if (idleTime > 5) {  // 5 minutes d'inactivité
+        alert('Votre session a expiré. Veuillez vous reconnecter.');
+        fetch('../../Model/logout.php')
+            .then(response => {
+                if (response.ok) 
+                {
+                    window.location.href = 'signIn.html';  // Redirection vers la page de connexion
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+}
+function resetIdleTime() 
+{
+    idleTime = 0;
+}
+
+let idleTime = 0;
+document.addEventListener('mousemove', resetIdleTime);
+document.addEventListener('keydown', resetIdleTime);
+// Appeler timerIncrement toutes les minutes (ou selon la fréquence souhaitée)
+setInterval(timerIncrement, 60000);  // 60000 millisecondes équivalent à 1 minute
+
 </script>
 </html>

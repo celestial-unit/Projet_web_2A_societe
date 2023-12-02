@@ -1,4 +1,7 @@
 <?php
+// Répondez avec un statut HTTP OK
+http_response_code(200);
+
 session_start();
 // Détruire le token de la session
 unset($_SESSION['jwtUserToken']);

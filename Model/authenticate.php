@@ -1,23 +1,21 @@
 <?php
-include('../vendor/autoload.php');
-include('../Controller/sign.php');
-
-
-function genererTokenReinitialisation($email)
+function genererTokenReinitialisation($email, $pdo)
 {
     if (function_exists('random_bytes')) {
         $token = bin2hex(random_bytes(32));
     } else {
         $token = bin2hex(openssl_random_pseudo_bytes(32));
     }
-    $expiration_time = date("Y-m-d H:i:s", strtotime("+1 hour")); 
+
+    $expiration_time = date("Y-m-d H:i:s", strtotime("+1 hour"));
 
     // Utilisez une table distincte pour stocker les tokens de réinitialisation
-    $pdo = config::getConnexion();
     $query = $pdo->prepare(
-        "INSERT INTO personne (Email, token, expiration_time) 
-        VALUES (:email, :token, :expiration_time);"
+        "UPDATE personne 
+        SET token = :token, expiration_time = :expiration_time 
+        WHERE Email = :email;"
     );
+
     $query->execute([
         'email' => $email,
         'token' => $token,
@@ -27,20 +25,34 @@ function genererTokenReinitialisation($email)
     return $token;
 }
 
+
 // auth.php
-function verifierTokenReinitialisation($email, $token)
+function verifierTokenReinitialisation($email, $pdo)
 {
-    $pdo = config::getConnexion();
     $query = $pdo->prepare(
-        "SELECT * FROM personne 
-        WHERE Email = :email AND token = :token 
-        AND expiration_time > NOW();"
+        "SELECT token, expiration_time FROM personne 
+        WHERE Email = :email;"
     );
     $query->execute([
-        'Email' => $email,
-        'token' => $token
+        'email' => $email,
     ]);
-    return $query->fetch();
+
+    $result = $query->fetch();
+
+    if ($result && $result['token']) {
+        // Vérifier si le token n'est pas expiré
+        $expirationTime = new DateTime($result['expiration_time']);
+        $currentTime = new DateTime();
+
+        if ($expirationTime > $currentTime) {
+            // Token valide
+            return true;
+        }
+    }
+    // Token expiré ou non trouvé
+    return false;
 }
+
+
 
 ?>

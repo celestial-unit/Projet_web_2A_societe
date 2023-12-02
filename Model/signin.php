@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
                 'Status' => $recruteur['Status']
             );
             //token
-            $userToken=genererTokenReinitialisation($enteredEmail);
+            $userToken=genererTokenReinitialisation($enteredEmail,$pdo );
             $_SESSION['reset_token'] = $token;
             /*$userToken = generateJWT($user['Email'], [
                 'Nom' => $user['Nom'],
