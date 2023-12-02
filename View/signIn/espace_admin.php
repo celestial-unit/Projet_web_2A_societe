@@ -16,6 +16,22 @@ if (!$resultatVerification)
     echo "<script>alert('connection time expired');</script>";
     exit();
 }
+
+
+//chart
+//etudiant
+$requeteEtudiants = "SELECT COUNT(*) as nbEtudiants FROM personne WHERE role = 'etudiant'";
+$resultatEtudiants = $pdo->query($requeteEtudiants);
+$nombreEtudiants = $resultatEtudiants->fetchColumn();
+//recruteur
+$requeteRecruteurs = "SELECT COUNT(*) as nbRecruteurs FROM personne WHERE role = 'recruteur'";
+$resultatRecruteurs = $pdo->query($requeteRecruteurs);
+$nombreRecruteurs = $resultatRecruteurs->fetchColumn();
+//statistiques
+$totalUtilisateurs = $nombreEtudiants + $nombreRecruteurs+1;
+
+$pourcentageEtudiants = ($nombreEtudiants / $totalUtilisateurs) * 100;
+$pourcentageRecruteurs = ($nombreRecruteurs / $totalUtilisateurs) * 100;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +47,9 @@ if (!$resultatVerification)
 
 <body>
     <!-- =============== Navigation ================ -->
+    
     <div class="container">
+    
         <div class="navigation">
             <ul>
                 <li>
@@ -166,7 +184,7 @@ if (!$resultatVerification)
                 </div>
             </div>
               <!-- ================ Order Details List ================= -->
-              <div class="details">
+            <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Recent Orders</h2>
@@ -298,35 +316,60 @@ if (!$resultatVerification)
                     </table>
                 </div>
                 </div>
+                
+                <table>
+                    <li>
+                     <div class="small-chart">
+                        <canvas id="myChart" width="100" height="100"></canvas>
+                    </div>
 
-    <table>
-    <li>
-        <img src="https://www.tuc.org.uk/sites/default/files/g2.gif" alt="stats">
-    </li>
-    <li>
-        <img src="https://www.zippia.com/wp-content/uploads/2022/01/paid-unpaid-internship-breakdown.jpg" alt="stats">
-    </li>
-    <li>
-        <img src="https://v8g5p6n8.rocketcdn.me/wp-content/uploads/2023/02/Reasons-Why-Userd-Leave-a-Page.jpeg" alt="stats">
-    </li>
-    <li>
-        <img src="https://blog.hubspot.com/hs-fs/hubfs/copy-template-slide-pie-chart%20(7).jpg?width=975&height=549&name=copy-template-slide-pie-chart%20(7).jpg" alt="stats">
-    </li>
-    </table>
-</div>
+                    </li>
+                    <li>
+                        <img src="https://www.tuc.org.uk/sites/default/files/g2.gif" alt="stats">
+                    </li>
+                    <li>
+                        <img src="https://www.zippia.com/wp-content/uploads/2022/01/paid-unpaid-internship-breakdown.jpg" alt="stats">
+                    </li>
+                    <li>
+                        <img src="https://v8g5p6n8.rocketcdn.me/wp-content/uploads/2023/02/Reasons-Why-Userd-Leave-a-Page.jpeg" alt="stats">
+                    </li>
+                    <li>
+                        <img src="https://blog.hubspot.com/hs-fs/hubfs/copy-template-slide-pie-chart%20(7).jpg?width=975&height=549&name=copy-template-slide-pie-chart%20(7).jpg" alt="stats">
+                    </li>
+                </table>
             </div>
-            
         </div>
-        
+       
     </div>
+        
+
     
 
-
+   
     <!-- =========== Scripts =========  -->
     <script src="compte_etudiant.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var pourcentageEtudiants = <?php echo $pourcentageEtudiants; ?>;
+        var pourcentageRecruteurs = <?php echo $pourcentageRecruteurs; ?>;
+
+        var data = {
+            labels: ['Étudiants', 'Recruteurs'],
+            datasets: [{
+                data: [pourcentageEtudiants, pourcentageRecruteurs],
+                backgroundColor: ['blue', 'green']
+            }]
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: data
+        });
+    </script>
 </body>
 </html>
