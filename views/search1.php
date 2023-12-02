@@ -53,6 +53,7 @@ $conn->close();
             </a>
         </div>
 
+        <div id="messageContainer"></div>
         <!-- Ajout de la div pour contenir les cartes -->
         <div id="cardsContainer" class='container' tabindex='1'>
             <!-- Le contenu des cartes sera affiché ici -->
@@ -116,30 +117,45 @@ $conn->close();
 }
 
 
-        function displayResults(data) {
-            var container = document.getElementById('cardsContainer');
-            container.innerHTML = ''; // Effacer le contenu actuel
+function displayResults(data) {
+    var container = document.getElementById('cardsContainer');
+    var messageContainer = document.getElementById('messageContainer');
 
-            if (data.length > 0) {
-                data.forEach(card => {
-                    // Construire le HTML de chaque carte
-                    var cardHtml = '<div class="card">';
-                    cardHtml += '<div class="card-details">';
-                    cardHtml += '<p class="text-title">' + card['Nom'] + '</p>';
-                    cardHtml += '<p class="text-body">' + card['nbheures'] + '</p>';
-                    cardHtml += '<p class="text-body">' + card['image_url'] + '</p>';
-                    cardHtml += '</div>';
-                    cardHtml += '<a href="details.php?id=' + card['id_formation'] + '" class="card-button">More info</a>';
-                    cardHtml += '</div>';
+    // Vérifier si messageContainer existe
+    if (!messageContainer) {
+        console.error('Erreur : messageContainer n\'existe pas.');
+        return;
+    }
 
-                    // Ajouter la carte au conteneur
-                    container.innerHTML += cardHtml;
-                });
-            } else {
-                // Aucune formation trouvée
-                container.innerHTML = '<p>Aucune formation trouvée.</p>';
-            }
-        }
+    container.innerHTML = ''; // Effacer le contenu actuel
+
+    if (data.length > 0) {
+        // Message indiquant le nombre de formations trouvées
+        var message = 'We found ' + data.length + ' training(s) for you';
+        messageContainer.innerHTML = '<p>' + message + '</p>';
+
+        data.forEach(card => {
+            // Construire le HTML de chaque carte
+            var cardHtml = '<div class="card">';
+            cardHtml += '<div class="card-details">';
+            cardHtml += '<p class="text-title">' + card['Nom'] + '</p>';
+            cardHtml += '<p class="text-body">' + card['nbheures'] + '</p>';
+            cardHtml += '<p class="text-body">' + card['image_url'] + '</p>';
+            cardHtml += '</div>';
+            cardHtml += '<a href="details.php?id=' + card['id_formation'] + '" class="card-button">More info</a>';
+            cardHtml += '</div>';
+
+            // Ajouter la carte au conteneur
+            container.innerHTML += cardHtml;
+        });
+    } else {
+        // Aucune formation trouvée
+        container.innerHTML = '<p>Aucune formation trouvée.</p>';
+        messageContainer.innerHTML = ''; // Effacer le message s'il n'y a aucune formation
+    }
+}
+
+
     </script>
 </body>
 </html>

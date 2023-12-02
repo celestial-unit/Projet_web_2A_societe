@@ -66,6 +66,12 @@ $conn->close();
                 ?>
             </div>
         </div>
+        <a href="#" class="slider-button--prev">
+      <i class="material-icons">chevron_left</i>
+    </a>
+    <a href="#" class="slider-button--next">
+      <i class="material-icons">chevron_right</i>
+    </a>
     </div>
 </body>
 </html>
