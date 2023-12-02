@@ -3,8 +3,8 @@
 http_response_code(200);
 
 session_start();
-// Détruire le token de la session
-unset($_SESSION['jwtUserToken']);
+unset($_SESSION['admin']);
+unset($_SESSION['admintoken']);
 session_destroy();
 
 // Empêcher la mise en cache de la page précédente

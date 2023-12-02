@@ -10,6 +10,7 @@ $personne = new Personne();
 $conn = new config();
 $pdo = $conn->getConnexion(); // Obtenez la connexion PDO
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') 
 {
     $enteredEmail = $_GET['Email'];
@@ -20,11 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
         echo 'window.location.href="../View/SignIn/signIn.html";</script>';
         exit;
     }
-    if ($enteredEmail==='admin@unipath.com' && $enteredPassword==="UNIPATH") 
-        {
+    if ($enteredEmail === 'admin@unipath.com' && $enteredPassword === "UNIPATH") {
+        $_SESSION['admin'] = array(
+            'Email' => 'admin@unipath.com',
+            'pwd' => $admin['pwd'],
+            'role' => 'admin'
+        );
+    
+        $adminToken = genererTokenReinitialisation($enteredEmail, $pdo);
+        $_SESSION['admintoken'] = $adminToken;
+    
+        if ($_SESSION['admin']['role'] === 'admin') {
             header('Location: ../View/SignIn/espace_admin.php');
             exit();
         }
+    }
     else
     {
         $user = $personne->getUserByEmail($enteredEmail, $pdo);
@@ -57,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
             );
             //token
             $userToken=genererTokenReinitialisation($enteredEmail,$pdo );
-            $_SESSION['reset_token'] = $token;
+            $_SESSION['reset_token'] = $userToken;
             if ($_SESSION['user']['Role'] === 'etudiant' && $user['Status']==='Abled') 
             {
                 header('Location: ../View/SignIn/compte_etudiant.php');

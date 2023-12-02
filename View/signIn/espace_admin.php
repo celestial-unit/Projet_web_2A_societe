@@ -1,9 +1,21 @@
 <?php
+session_start();
+include("../../Model/authenticate.php");
 include("../../Controller/sign.php");
 $pdo = Config::getConnexion(); // Assurez-vous d'avoir une connexion PDO
 $personne = new Personne();
 $userCount = $personne->countUsers($pdo);
-
+$email =$_SESSION['admin']['Email'];
+$token = $_SESSION['admintoken']; // Assurez-vous que vous avez le token de réinitialisation
+$resultatVerification = verifierTokenReinitialisation($email, $pdo);
+//token non valide
+if (!$resultatVerification) 
+{
+    // Rediriger l'utilisateur vers la page de réinitialisation si le token n'est pas valide
+    header('Location: signIn.html');
+    echo "<script>alert('connection time expired');</script>";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
