@@ -50,12 +50,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
                 'Email' => $recruteur['Email'],
                 'Numero' => $recruteur['Tel'],
                 'Diplome' => $recruteur['Diplome'],
-                'Adresse' => $recruteur['Adresse'],
                 'Role' => $recruteur['Role'],
                 'Domaine_recruteur'=>$recruteur['Domaine_recruteur'],
                 'Titre_recruteur'=>$recruteur['Titre_recruteur'],
                 'Status' => $recruteur['Status']
             );
+            //token
+            $userToken=genererTokenReinitialisation($enteredEmail);
+            $_SESSION['reset_token'] = $token;
+            /*$userToken = generateJWT($user['Email'], [
+                'Nom' => $user['Nom'],
+                'Prenom' => $user['Prenom'],
+                'cin' => $user['CIN'],
+                'Email' => $user['Email'],
+                'Numero' => $user['Tel'],
+                'Age' => $user['Age'],
+                'Diplome' => $user['Diplome'],
+                'Niveau' => $user['Niveau'],
+                'Role' => $user['Role'],
+                'Status' => $user['Status']
+            ]);
+             //stocker dans une session
+             $_SESSION['jwtUserToken'] = $userToken;
+            // Stocker le token dans la base de données
+            $updateTokenQuery = "UPDATE personne SET token = ? WHERE Email = ?";
+            $stmt = $pdo->prepare($updateTokenQuery);
+            $stmt->execute([$userToken, $user['Email']]);
 
             /*jwt
             $userToken = generateJWT($userInfo);

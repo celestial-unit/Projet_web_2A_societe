@@ -1,5 +1,17 @@
 <?php
 session_start();
+include("../../Model/authenticate.php");
+$email = $_SESSION['user']['Email']; // Assurez-vous que vous avez l'email de l'utilisateur
+$token = $_SESSION['reset_token']; // Assurez-vous que vous avez le token de réinitialisation
+
+$resultatVerification = verifierTokenReinitialisation($email, $token);
+
+if (!$resultatVerification) 
+{
+    // Rediriger l'utilisateur vers la page de réinitialisation si le token n'est pas valide
+    header('Location: signIn.html');
+    exit();
+}
 
 // Définir une variable PHP en fonction des champs remplis
 $champsRemplis = (
