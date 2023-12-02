@@ -32,6 +32,18 @@ $totalUtilisateurs = $nombreEtudiants + $nombreRecruteurs+1;
 
 $pourcentageEtudiants = ($nombreEtudiants / $totalUtilisateurs) * 100;
 $pourcentageRecruteurs = ($nombreRecruteurs / $totalUtilisateurs) * 100;
+
+//abled
+$abled = "SELECT COUNT(*) as nbabled FROM personne WHERE Status = 'Abled'";
+$abled = $pdo->query($abled);
+$nombreabled = $abled->fetchColumn();
+//disabled
+$disabled = "SELECT COUNT(*) as nbdisabled FROM personne WHERE Status = 'Disabled'";
+$disabled = $pdo->query($disabled);
+$nombredisabled = $disabled->fetchColumn();
+//stat
+$pourcentageabled= ($nombreabled / $totalUtilisateurs) * 100;
+$pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -319,20 +331,16 @@ $pourcentageRecruteurs = ($nombreRecruteurs / $totalUtilisateurs) * 100;
                 
                 <table>
                     <li>
-                     <div class="small-chart">
-                        <canvas id="myChart" width="100" height="100"></canvas>
-                    </div>
+    
+                        <canvas id="myChart" width="10" height="10" position="fixed"></canvas>
+        
 
                     </li>
                     <li>
-                        <img src="https://www.tuc.org.uk/sites/default/files/g2.gif" alt="stats">
-                    </li>
-                    <li>
-                        <img src="https://www.zippia.com/wp-content/uploads/2022/01/paid-unpaid-internship-breakdown.jpg" alt="stats">
-                    </li>
-                    <li>
-                        <img src="https://v8g5p6n8.rocketcdn.me/wp-content/uploads/2023/02/Reasons-Why-Userd-Leave-a-Page.jpeg" alt="stats">
-                    </li>
+                    
+                        <canvas id="Chart" width="100" height="100" position="fixed"></canvas>
+                  
+
                     <li>
                         <img src="https://blog.hubspot.com/hs-fs/hubfs/copy-template-slide-pie-chart%20(7).jpg?width=975&height=549&name=copy-template-slide-pie-chart%20(7).jpg" alt="stats">
                     </li>
@@ -359,17 +367,76 @@ $pourcentageRecruteurs = ($nombreRecruteurs / $totalUtilisateurs) * 100;
         var pourcentageRecruteurs = <?php echo $pourcentageRecruteurs; ?>;
 
         var data = {
-            labels: ['Étudiants', 'Recruteurs'],
+            labels: ['Students', 'recruiter'],
             datasets: [{
                 data: [pourcentageEtudiants, pourcentageRecruteurs],
-                backgroundColor: ['blue', 'green']
+                backgroundColor: ['#D2B48C', '#C3E6CB']
             }]
         };
 
+        var options = {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Rate of the Number of Students and Recruiters in UNIPATH',
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+
         var myChart = new Chart(ctx, {
             type: 'pie',
-            data: data
+            data: data,
+            options:options,
         });
+
+    var ctxx = document.getElementById('Chart').getContext('2d');
+    var pourcentageabled = <?php echo $pourcentageabled; ?>;
+    var pourcentagedisabled = <?php echo $pourcentagedisabled ; ?>;
+    var data = {
+        labels: ['Abled Account', 'Disabled Account'],
+        datasets: [{
+            data: [pourcentageabled, pourcentagedisabled],
+            backgroundColor: ['#F7F7DC', '#C3E6CB'] // Couleurs adaptées selon les besoins
+        }]
+    };
+    var options = {
+    plugins: {
+        title: {
+            display: true,
+            text: 'Rate of Abled and Disabled Accounts in UNIPATH',
+            font: {
+                size: 16
+            }
+        }
+    }
+}
+
+    var myChart = new Chart(ctxx, {
+        type: 'bar', // Changement du type de graphique à 'bar'
+        data: data,
+        options:options,
+    });
+
+
+
+    function ajusterTailleGraphique()
+     {
+    var largeurGraphique = 30; // Définissez la largeur souhaitée en pixels
+    var hauteurGraphique = 30; // Définissez la hauteur souhaitée en pixels
+
+   
+    // Modifiez le style du conteneur du graphique
+    document.getElementById('myChart').style.width = largeurGraphique + 'px';
+    document.getElementById('myChart').style.height = hauteurGraphique + 'px';
+    document.getElementById('Chart').style.width = largeurGraphique + 'px';
+    document.getElementById('Chart').style.height = hauteurGraphique + 'px';
+     }
+
+// Appelez la fonction pour ajuster la taille du graphique
+ajusterTailleGraphique();
     </script>
 </body>
 </html>
