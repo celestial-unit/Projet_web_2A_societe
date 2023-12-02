@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     if ($enteredEmail === 'admin@unipath.com' && $enteredPassword === "UNIPATH") {
         $_SESSION['admin'] = array(
             'Email' => 'admin@unipath.com',
-            'pwd' => $admin['pwd'],
             'role' => 'admin'
         );
     
