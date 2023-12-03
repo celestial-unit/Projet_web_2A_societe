@@ -42,16 +42,42 @@ $conn->close();
     <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
     <link rel="stylesheet" href="./search.css">
+
 </head>
 <body>
+<div class='search-container' tabindex='1'>
+        <input id="searchInput" placeholder='Rechercher' type='text'>
+        <a class='button' id="searchButton">
+            <i class='fa fa-search'></i>
+        </a>
+    </div>
+    <div class="jumbotron">
+    <div class="container">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Unipath</a>
+          </div>
 
-    <div class='container' tabindex='1'>
-        <div class='search-container' tabindex='1'>
-            <input id="searchInput" placeholder='Rechercher' type='text'>
-            <a class='button' id="searchButton">
-                <i class='fa fa-search'></i>
-            </a>
-        </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="emna.php">Training</a></li>
+              <li><a href="#">Intership</a></li>
+              <li><a href="../signIn/signIn.html">Account</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
 
         <div id="messageContainer"></div>
         <!-- Ajout de la div pour contenir les cartes -->
@@ -132,7 +158,7 @@ function displayResults(data) {
     if (data.length > 0) {
         // Message indiquant le nombre de formations trouvées
         var message = 'We found ' + data.length + ' training(s) for you';
-        messageContainer.innerHTML = '<p>' + message + '</p>';
+        messageContainer.innerHTML = '<p style="position: absolute; top: 0; left: 0;">' + message + '</p>';
 
         data.forEach(card => {
             // Construire le HTML de chaque carte
@@ -140,7 +166,7 @@ function displayResults(data) {
             cardHtml += '<div class="card-details">';
             cardHtml += '<p class="text-title">' + card['Nom'] + '</p>';
             cardHtml += '<p class="text-body">' + card['nbheures'] + '</p>';
-            cardHtml += '<p class="text-body">' + card['image_url'] + '</p>';
+            cardHtml += '<p class="text-body">' + card['datedebut'] + '</p>';
             cardHtml += '</div>';
             cardHtml += '<a href="details.php?id=' + card['id_formation'] + '" class="card-button">More info</a>';
             cardHtml += '</div>';
