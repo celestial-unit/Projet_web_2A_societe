@@ -1,36 +1,26 @@
 <?php
+require '../config.php';
 header("Access-Control-Allow-Origin: *"); // Permettre toutes les origines (CORS)
-
 // Connexion à la base de données (à remplacer avec vos informations)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "unipath_db";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$db=config::getConnexion();
 
 // Récupération du terme de recherche depuis l'URL
 $searchTerm = isset($_GET['term']) ? $_GET['term'] : '';
 
 // Requête pour rechercher les formations dans la base de données
 $sql = "SELECT * FROM formation WHERE Nom LIKE '%$searchTerm%'";
-$result = $conn->query($sql);
+$result = $db->query($sql);
 
 $rows = array(); // Variable pour stocker le HTML des cartes
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+if ($result->rowCount() > 0) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $rows[] = $row;
     }
 }
 
 //echo json_encode($rows);
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -142,7 +132,6 @@ $conn->close();
     }
 }
 
-
 function displayResults(data) {
     var container = document.getElementById('cardsContainer');
     var messageContainer = document.getElementById('messageContainer');
@@ -168,7 +157,7 @@ function displayResults(data) {
             cardHtml += '<p class="text-body">' + card['nbheures'] + '</p>';
             cardHtml += '<p class="text-body">' + card['datedebut'] + '</p>';
             cardHtml += '</div>';
-            cardHtml += '<a href="details.php?id=' + card['id_formation'] + '" class="card-button">More info</a>';
+            cardHtml += '<a href="viewmore.php?id=' + card['id_formation'] + '" class="card-button">More info</a>';
             cardHtml += '</div>';
 
             // Ajouter la carte au conteneur
@@ -180,8 +169,6 @@ function displayResults(data) {
         messageContainer.innerHTML = ''; // Effacer le message s'il n'y a aucune formation
     }
 }
-
-
     </script>
 </body>
 </html>

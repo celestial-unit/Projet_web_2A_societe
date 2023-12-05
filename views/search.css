@@ -113,11 +113,8 @@ input:focus {
   border: 2px solid #c3c6ce;
   transition: 0.5s ease-out;
   overflow: visible;
-  margin: 20px; /* Ajout de marge autour de chaque carte */
-}
-
-.card:first-child {
-  margin-top: 0; /* Annuler la marge au-dessus de la première carte */
+  margin: 20px;
+  z-index: 1; /* Toutes les cartes ont le même niveau z */
 }
 
 .card-details {
@@ -221,3 +218,8 @@ input:focus {
   border-radius: 2px;
   box-shadow: none;
 }
+body {
+  background-color: #d3b8a5;
+}
+
+
