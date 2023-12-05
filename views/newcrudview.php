@@ -103,7 +103,6 @@ $tab=$fc->afficherFormation();
       </tbody>
     </table>
     <div class="clearfix">
-      <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
       <ul class="pagination">
         <li class="page-item disabled"><a href="#">Previous</a></li>
         <li class="page-item"><a href="#" class="page-link">1</a></li>
@@ -143,6 +142,46 @@ $tab=$fc->afficherFormation();
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script><script  src="./scriptnew.js"></script>
+<script>
+$(document).ready(function(){
+  var elementsParPage = 4;
+  var totalElements = $(".table tbody tr").length;
+  var totalPages = Math.ceil(totalElements / elementsParPage);
+
+  $(".table tbody tr").hide();
+  $(".table tbody tr").slice(0, elementsParPage).show();
+
+  // Définir la classe "active" sur la page 1 au chargement de la page
+  $(".pagination li:contains('1')").addClass("active").siblings().removeClass("active");
+
+  $(".pagination li").on('click', function(){
+    var page = $(this).text();
+
+    if (page === "Next") {
+      page = $(".pagination li.active").text();
+      if (page < totalPages) {
+        page++;
+      }
+    } else if (page === "Previous") {
+      page = $(".pagination li.active").text();
+      if (page > 1) {
+        page--;
+      }
+    }
+
+    var debut = (page - 1) * elementsParPage;
+    var fin = debut + elementsParPage;
+
+    $(".table tbody tr").hide();
+    $(".table tbody tr").slice(debut, fin).show();
+
+    // Mettre à jour la classe active sur les liens de pagination
+    $(".pagination li").removeClass("active");
+    $(".pagination li:contains('" + page + "')").addClass("active");
+  });
+});
+
+</script>
 
 </body>
 </html>
