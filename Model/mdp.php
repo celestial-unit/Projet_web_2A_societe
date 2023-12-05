@@ -43,7 +43,7 @@ if (!$user)
         $mail->addAddress($email); // Adresse e-mail du destinataire
         $mail->Subject = 'Password Change Verification';
         $mail->isHTML(true);
-$mail->Body = 'Hello ' . $user['Nom'] . ',<br>&nbsp;' .
+$mail->Body = 'Hello ' . $user['Prenom'].' '. $user['Nom'] . ',<br>&nbsp;' .
     'Your password for your Unipath account has been changed successfully. If you did not initiate this change, please contact our support team immediately.<br>&nbsp;' .
     'Best regards,<br>&nbsp;Unipath Team';
         
