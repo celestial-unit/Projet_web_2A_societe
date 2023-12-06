@@ -12,7 +12,16 @@ $tab=$fc->afficherFormation();
 <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'><link rel="stylesheet" href="./newstyle.css">
+<style>
+  #searchButton {
+  float: left;
+  margin-left: 60px;
+}
 
+#searchInput {
+  margin-left: 10px;
+}
+  </style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -27,7 +36,10 @@ $tab=$fc->afficherFormation();
         <a href="addformation.php" class="btn btn-success" target="_blank">
     <i class="material-icons">&#xE147;</i> <span>Add New Training</span>
 </a>
-          <a href="supprimerformation.php" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+<div class="search form-inline">
+  <input type="text" id="searchInput" placeholder="Search..." class="form-control">
+  <button id="searchButton" class="btn btn-primary">Search</button>
+</div>
         </div>
       </div>
     </div>
@@ -104,7 +116,7 @@ $tab=$fc->afficherFormation();
     </table>
     <div class="clearfix">
       <ul class="pagination">
-        <li class="page-item disabled"><a href="#">Previous</a></li>
+        <li class="page-item "><a href="#">Previous</a></li>
         <li class="page-item"><a href="#" class="page-link">1</a></li>
         <li class="page-item"><a href="#" class="page-link">2</a></li>
         <li class="page-item active"><a href="#" class="page-link">3</a></li>
@@ -115,35 +127,13 @@ $tab=$fc->afficherFormation();
     </div>
   </div>
 </div>
-<!-- Edit Modal HTML -->
 
-<!-- Edit Modal HTML -->
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Delete Employee</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete these Records?</p>
-          <p class="text-warning"><small>This action cannot be undone.</small></p>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-danger" value="Delete">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script><script  src="./scriptnew.js"></script>
 <script>
-$(document).ready(function(){
+$(document).ready(function() {
   var elementsParPage = 4;
   var totalElements = $(".table tbody tr").length;
   var totalPages = Math.ceil(totalElements / elementsParPage);
@@ -179,9 +169,32 @@ $(document).ready(function(){
     $(".pagination li").removeClass("active");
     $(".pagination li:contains('" + page + "')").addClass("active");
   });
+
+  $(document).ready(function() {
+  // ... (votre code de pagination) ...
+
+  $("#searchButton").on("click", function() {
+    // Récupérer la valeur saisie dans le champ de recherche
+    var searchValue = $("#searchInput").val().toLowerCase();
+
+    // Parcourir toutes les lignes du tableau
+    $(".table tbody tr").each(function() {
+      var rowText = $(this).text().toLowerCase();
+
+      // Vérifier si la valeur de recherche est présente dans le texte de la ligne (nom de formation, date de début ou domaine)
+      var formationName = $(this).find("td:eq(3)").text().toLowerCase(); // Colonne du nom de formation
+      var dateDebut = $(this).find("td:eq(5)").text().toLowerCase(); // Colonne de la date de début
+      var domaine = $(this).find("td:eq(11)").text().toLowerCase(); // Colonne du domaine
+
+      if (formationName.includes(searchValue) || dateDebut.includes(searchValue) || domaine.includes(searchValue)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
 });
-
+});
 </script>
-
 </body>
 </html>
