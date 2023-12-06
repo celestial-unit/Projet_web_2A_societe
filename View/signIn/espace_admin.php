@@ -73,7 +73,7 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="espace_admin.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -82,7 +82,7 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                 </li>
 
                 <li>
-                    <a href="affichage_users.php">
+                    <a href="affichage2.0.php">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>

@@ -52,7 +52,7 @@
         </div>
 
         <div class="num" id="num">
-            <label for="text">Number</label>
+            <label for="text">Phone Number</label>
             <input type="number" id="number" placeholder="Number" name="num">
         </div>
 

@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     // Rediriger l'utilisateur vers la page d'accueil ou une autre page après le traitement du formulaire
-    header('Location: ../View/signIn/affichage_users.php');
+    header('Location: ../View/signIn/affichage2.0.php');
     exit;
    
 }
