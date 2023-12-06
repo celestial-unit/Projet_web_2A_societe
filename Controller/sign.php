@@ -135,9 +135,12 @@ public function showUserList()
 
         // Display the list of users
         echo '<table border="1">';
-        echo "<tr><td>First Name</td><td>Last Name</td><td>Email</td><td>Role</td><td>CIN</td><td>Age</td><td>Phone number</td><td>ID</td><td>Level</td><td>Diploma</td><td>Recruter Domain</td><td>Status</td><td>Recruiter Title</td></tr>";
+        echo "<tr><td>First Name</td><td>Last Name</td><td>Email</td><td>Role</td><td>CIN</td><td>Age</td><td>Phone number</td><td>Level</td><td>Diploma</td><td>Recruter Domain</td><td>Status</td><td>Recruiter Title</td></tr>";
 
-        foreach ($users as $user) {
+        foreach ($users as $user) 
+        {
+            if ($user['Status'] === 'Disabled') 
+            {
             echo "<tr>";
             echo "<td>" . $user['Prenom'] . "</td>";
             echo "<td>" . $user['Nom'] . "</td>";
@@ -146,13 +149,33 @@ public function showUserList()
             echo "<td>" . $user['CIN'] . "</td>";
             echo "<td>" . $user['Age'] . "</td>";
             echo "<td>" . $user['Tel'] . "</td>";
-            echo "<td>" . $user['id'] . "</td>";
             echo "<td>" . $user['Niveau'] . "</td>";
             echo "<td>" . $user['Diplome'] . "</td>";
             echo "<td>" . $user['Domaine_recruteur'] . "</td>";
             echo "<td>" . $user['Status'] . "</td>";
             echo "<td>" . $user['Titre_recruteur'] . "</td>";
             echo "</tr>";
+            }
+        }
+        foreach ($users as $user) 
+        {
+            if ($user['Status'] === 'Abled') 
+            {
+            echo "<tr>";
+            echo "<td>" . $user['Prenom'] . "</td>";
+            echo "<td>" . $user['Nom'] . "</td>";
+            echo "<td>" . $user['Email'] . "</td>";
+            echo "<td>" . $user['Role'] . "</td>";
+            echo "<td>" . $user['CIN'] . "</td>";
+            echo "<td>" . $user['Age'] . "</td>";
+            echo "<td>" . $user['Tel'] . "</td>";
+            echo "<td>" . $user['Niveau'] . "</td>";
+            echo "<td>" . $user['Diplome'] . "</td>";
+            echo "<td>" . $user['Domaine_recruteur'] . "</td>";
+            echo "<td>" . $user['Status'] . "</td>";
+            echo "<td>" . $user['Titre_recruteur'] . "</td>";
+            echo "</tr>";
+            }
         }
 
         echo "</table>";
