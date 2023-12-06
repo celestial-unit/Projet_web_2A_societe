@@ -51,7 +51,6 @@ function updateFormation($id_formation, $nom, $ispaid, $datedebut, $niveau, $ima
         echo "Erreur lors de la mise à jour de la formation : " . $conn->error;
     }
 }
-
 // Récupération des données du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mettez ici le code pour récupérer les données du formulaire
@@ -157,14 +156,21 @@ if ($result_formation->num_rows > 0) {
         </div>
 
         <div class="survey-element" id="survey-type">
-        <label for="type_cours">Type cours:</label>
-        <input type="number" name="type_cours" id="type_cours" value="<?php echo $type_cours_formation; ?>">
-        </div>
-      
-        <div class="survey-element" id="survey-nature">
-        <label for="nature_cours">Nature cours:</label>
-        <input type="number" name="nature_cours" id="nature_cours" value="<?php echo $nature_cours_formation; ?>">
-        </div>
+    <label for="type_cours">Type cours:</label>
+    <select name="type_cours" id="type_cours">
+        <option value="weekend" <?php if ($type_cours_formation === 'weekend') echo 'selected'; ?>>Weekend classes</option>
+        <option value="normal" <?php if ($type_cours_formation === 'normal') echo 'selected'; ?>>Normal classes</option>
+        <option value="night" <?php if ($type_cours_formation === 'night') echo 'selected'; ?>>Night classes</option>
+    </select>
+</div>
+
+<div class="survey-element" id="survey-nature">
+    <label for="nature_cours">Nature cours:</label>
+    <select name="nature_cours" id="nature_cours">
+        <option value="accelerated" <?php if ($nature_cours_formation === 'accelerated') echo 'selected'; ?>>Accelerated courses</option>
+        <option value="normal" <?php if ($nature_cours_formation === 'normal') echo 'selected'; ?>>Normal courses</option>
+    </select>
+</div>
         <div class="survey-element" id="survey-name">
     <label for="domaine">Domaine</label>
     <select name="domaine" id="domaine" onchange="updateIdTypeFormation()">

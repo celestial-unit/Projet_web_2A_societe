@@ -105,13 +105,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="number" name="nbheures" id="nbheures">
         </div>
         <div class="survey-element" id="survey-type">
-        <label for="type_cours">Type cours:</label>
-        <input type="number" name="type_cours" id="type_cours">
-        </div>
-        <div class="survey-element" id="survey-nature">
-        <label for="nature_cours">Nature cours:</label>
-        <input type="number" name="nature_cours" id="nature_cours">
-        </div>
+    <label for="type_cours">Type cours:</label>
+    <select name="type_cours" id="type_cours">
+        <option value="weekend">Weekend classes</option>
+        <option value="normal">Normal classes</option>
+        <option value="night">Night classes</option>
+    </select>
+</div>
+<div class="survey-element" id="survey-nature">
+    <label for="nature_cours">Nature cours:</label>
+    <select name="nature_cours" id="nature_cours">
+        <option value="accelerated">Accelerated courses</option>
+        <option value="normal">Normal courses</option>
+    </select>
+</div>
         <div class="survey-element" id="survey-name">
         <label for="domaine">Domaine</label>
         <select name="domaine" id="domaine">

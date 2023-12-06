@@ -52,13 +52,13 @@ $tab=$fc->afficherFormation();
 								<label for="selectAll"></label>
 							</span>
           </th>
-          <th>Id  formation</th>
-          <th>Id type formation</th>
+          <!--<th>Id  formation</th>
+          <th>Id type formation</th>-->
           <th>Name</th>
           <th>Is paid</th>
           <th>Date Debut</th>
           <th>niveau</th>
-          <th>image_url</th>
+       <!--   <th>image_url</th>-->
           <th>Nb d'heures</th>
           <th>Type de cours</th>
           <th>Nature cours</th>
@@ -85,13 +85,10 @@ $tab=$fc->afficherFormation();
                     <label for="checkbox1"></label>
                 </span>
             </td>
-            <td><?php echo $formationn['id_formation']; ?></td>
-            <td><?php echo $formationn['id_typeformation']; ?></td>
             <td><?php echo $formationn['Nom']; ?></td>
             <td><?php echo $formationn['ispaid']; ?></td>
             <td><?php echo $formationn['datedebut']; ?></td>
             <td><?php echo $formationn['Niveau']; ?></td>
-            <td><?php echo $formationn['image_url']; ?></td>
             <td><?php echo $formationn['nbheures']; ?></td>
             <td><?php echo $formationn['type_cours']; ?></td>
             <td><?php echo $formationn['nature_cours']; ?></td>

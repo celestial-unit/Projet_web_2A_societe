@@ -6,8 +6,8 @@
         private ?DateTime $datedebut = null;
         private ?string $image_url= null;
         private ?int  $nbheures= null;
-        private ?int $type_cours= null;
-        private ?int $nature_cours= null;
+        private ?string $type_cours= null;
+        private ?string $nature_cours= null;
         private ?string $id_typeformation= null;
         private ?string $domaine = null;
        // private ?string $description = null;
