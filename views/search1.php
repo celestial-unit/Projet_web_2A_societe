@@ -130,7 +130,7 @@ function displayResults(data) {
             cardHtml += '<p class="text-title">' + card['Nom'] + '</p>';
             cardHtml += '<p class="text-body">' + card['datedebut'] + '</p>';
             cardHtml += '</div>';
-            cardHtml += '<a href="viewmore.php?id=' + card['id_formation'] + '" class="card-button">More info</a>';
+            cardHtml += '<a href="ich.php?id=' + card['id_formation'] + '" class="card-button">More info</a>';
             cardHtml += '</div>';
 
             // Ajouter la carte au conteneur

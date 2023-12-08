@@ -21,6 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nature_cours = isset($_POST["nature_cours"]) ? $_POST["nature_cours"] : "";
     $domaine = isset($_POST["domaine"]) ? $_POST["domaine"] : "";
     $id_formation = isset($_POST["id_formation"]) ? $_POST["id_formation"] : "";
+    $location = isset($_POST["location"]) ? $_POST["location"] : "";
+    $email = isset($_POST["email"]) ? $_POST["email"] : "";
+
     $result = $db->query("SELECT id_typeformation FROM typeformation WHERE domaine = '$domaine'");
     
     if ($result) {
@@ -32,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Error in SQL query: " . $errorInfo[2];
         exit;
     }
-    $sqltraining = "INSERT INTO formation VALUES ('$nom','$ispaid','$niveau','$image_url','$nbheures','$type_cours','$nature_cours','$id_typeformation','$datedebutString','$domaine',NULL)";
+    $sqltraining = "INSERT INTO formation VALUES ('$nom','$ispaid','$niveau','$image_url','$nbheures','$type_cours','$nature_cours','$id_typeformation','$datedebutString','$domaine',NULL,'$location','$tel','$email')";
     if ($db->query($sqltraining) === TRUE) {
         echo "Form submitted successfully";
         header('location: newcrudview.php');
@@ -130,6 +133,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         ?>
                     </select>
         </div>  
+        <div class="survey-element" id="survey-name">
+    <label for="location">Location: </label>
+        <input type="text" name="location" id="location" maxlength="20">
+        </div>
+        <div class="survey-element" id="survey-name">
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" maxlength="20">
+        </div>
        <div class="survey-element" >
        <input type="submit" value="Save" id="save">
        <input type="reset" value="Reset">

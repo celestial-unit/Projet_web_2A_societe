@@ -1,34 +1,26 @@
+
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "unipath_db";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require '../config.php';
+$db = config::getConnexion();
 
 $sqlStatistics = "SELECT tf.domaine, COUNT(f.id_formation) as count
                   FROM typeformation tf
                   LEFT JOIN formation f ON tf.id_typeformation = f.id_typeformation
                   GROUP BY tf.domaine";
-$resultStatistics = $conn->query($sqlStatistics);
+$resultStatistics = $db->query($sqlStatistics);
 
 $statisticsData = array('labels' => array(), 'data' => array());
 
 if ($resultStatistics) {
-    while ($rowStatistics = $resultStatistics->fetch_assoc()) {
+    while ($rowStatistics = $resultStatistics->fetch(PDO::FETCH_ASSOC)) {
         $statisticsData['labels'][] = $rowStatistics['domaine'];
         $statisticsData['data'][] = intval($rowStatistics['count']);
     }
 } else {
     // Gérer l'erreur si la requête échoue
-    echo json_encode(array('error' => 'Erreur dans la requête : ' . $conn->error));
+    echo json_encode(array('error' => 'Erreur dans la requête : ' . $db->errorInfo()));
 }
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +31,7 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <canvas id="formationChart" width="400" height="200"></canvas>
+    <canvas id="formationChart"></canvas>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -70,6 +62,17 @@ $conn->close();
                 }
             });
         }
+
+        function ajusterTailleGraphique() {
+            var largeurGraphique = 200; // Définissez la largeur souhaitée en pixels
+            var hauteurGraphique = 30; // Définissez la hauteur souhaitée en pixels
+
+            // Modifiez le style du conteneur du graphique
+            document.getElementById('formationChart').style.width = largeurGraphique + 'px';
+            document.getElementById('formationChart').style.height = hauteurGraphique + 'px';
+        }
+
+        ajusterTailleGraphique();
     </script>
 </body>
 </html>

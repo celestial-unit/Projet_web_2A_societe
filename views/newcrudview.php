@@ -64,6 +64,8 @@ $tab=$fc->afficherFormation();
           <th>Nature cours</th>
           <th>domaine</th>
           <th>description</th>
+          <th>location</th>
+          <th>Email</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -94,6 +96,8 @@ $tab=$fc->afficherFormation();
             <td><?php echo $formationn['nature_cours']; ?></td>
             <td><?php echo $formationn['domaine']; ?></td>
             <td><?php echo $formationn['description']; ?></td>
+            <td><?php echo $formationn['location']; ?></td>
+            <td><?php echo $formationn['email']; ?></td>
             <td>
             <form method="POST" action="updateformation.php">
             <a href="updateformation.php?id_formation=<?php echo $formationn['id_formation']; ?>" class="edit">
@@ -168,7 +172,6 @@ $(document).ready(function() {
   });
 
   $(document).ready(function() {
-  // ... (votre code de pagination) ...
 
   $("#searchButton").on("click", function() {
     // Récupérer la valeur saisie dans le champ de recherche

@@ -3,7 +3,7 @@ require '../config.php';
 $db = config::getConnexion();
 $id_formation = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-$sql = "SELECT formation.*, typeformation.description, typeformation.domaine,formation.image_url
+$sql = "SELECT formation.*, typeformation.description, typeformation.domaine, formation.image_url,formation.location,formation.email
         FROM formation
         LEFT JOIN typeformation ON formation.id_typeformation = typeformation.id_typeformation
         WHERE formation.id_formation = $id_formation";
@@ -16,59 +16,108 @@ if (!$result) {
 $row = $result->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <title>Product Page</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="./details.css">
-
-    <style>
-        /* Styles pour la mise en page */
-        .container {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px; /* Ajout d'une marge autour du conteneur */
-        }
-
-        .left-column {
-            width: 45%; /* Ajustez la largeur de la colonne de gauche selon vos besoins */
-        }
-
-        .left-column img {
-            width: 100%;
-            opacity: 1;
-            transition: all 0.3s ease;
-        }
-
-        .right-column {
-            width: 45%; /* Ajustez la largeur de la colonne de droite selon vos besoins */
-            margin-left: 20px; /* Ajout d'une marge à gauche de la colonne de droite */
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <title>CodePen - test</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajustez cette valeur en fonction de votre besoin */
+}
+.intro-left i.fa-map-marker {
+    color: rgb(123, 67, 39);
+}
+.intro-left i.fa-envelope {
+    color: rgb(123, 67, 39);
+}
+</style>
 </head>
 <body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE  html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Gene.ly | Home</title>
+        <link rel="stylesheet" href="./ich.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- Logo and Menu -->
+        <header id="header">
+            <div class="wrapper">
+               <a href="/">
+                <img src="https://i.postimg.cc/tTxjZ7MF/biology.png">
+            </a> 
 
-<!-- Conteneur principal avec les deux colonnes -->
-<div class="container">
-<div class="left-column">
-        <img src="<?php echo $row['image_url']; ?>" alt="Strengthen your managers" class="g-img">
-    </div>
-  <!-- Right Column -->
-  <div class="right-column">
-    <!-- Product Description -->
+            <button id="submenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        <!-- Menu Links-->    
+
+            <ul class="menu-left">
+                <li><a href="#">
+                        Our mission
+                </a></li>
+                <li><a href="#">
+                        Services
+                </a></li>
+                <li><a href="#">
+                        Pricing
+                </a></li>
+                <li><a href="#">
+                        Contact
+                </a></li>
+            </ul>
 
 
-    <div class="training-description">
-      <span> Trainings</span>
-      <h1><?php echo $row['Nom'];?></h1>
-      <p><?php echo $row['description'];?></p>
-    </div>
-    <!-- Product Configuration -->
-    <div class="product-configuration">
-    <div class="row1">
+            <ul class="menu-right">
+                <li class="menu-cta"><a href="#">Get Started</a></li>
+            </ul>
+            </div>
+        </header>
+    
+        <!-- MENU END -->
+
+        <!-- INTRO PAGE START -->
+
+        <section id="intro">
+
+            <div class="top-right-gradient">
+                
+            </div>
+            <div class="wrapper">
+
+                <div class="intro-left">
+                    <h1><?php echo $row['Nom'];?></h1>
+                    <p><?php echo $row['description'];?></p>
+                    <span><i class="fa fa-map-marker"></i></span>
+                    <span><?php echo $row['location'];?></span>
+                    <br>
+                    <span><i class="fa fa-envelope"></i></span>
+                    <span><?php echo $row['email'];?></span>
+                </div>
+                <div class="intro-right">
+                    <img src="<?php echo $row['image_url']; ?>" alt="image">
+                </div>
+            </div>
+
+            <div class="bottom-left-gradient">
+                
+            </div>
+        </section>
+        <center>
+        <div class="container">
+          <div class="row1">
                         <div class="details-box">
                             <h3>This courses includes:</h3>
                             <div class="all-box">
@@ -96,15 +145,32 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
 
                             </div>
                         </div>
-    </div>
-      </div>
-      <div class="product-price">
-      <span><br>148$</span>
-    </div>
-    </div>    
-  </div>
-</main>
-<center style="width: 100%; background: #ffffff; text-align: left;">
+                        </center>
+        </div>
+        <!-- Intro Page END -->
+      
+        <!-- About Page Start -->
+      <section id="about">
+        <div class="wrapper">
+          <div class="about-left">
+            <img src="https://i.postimg.cc/7PNKwwB6/undraw-report-mx0a.png" alt="">
+          </div>
+          <div class="about-right">
+          
+        </div>
+        
+        <div class="top-right-gradient">
+          
+        </div>
+        
+      </section>
+      
+      <!-- About Page End -->
+      
+      <!-- Page Banner START -->
+      
+      <div class="page-banner">
+      <center style="width: 100%; background: #ffffff; text-align: left;">
 		<div style="max-width: 600px; margin: auto;" class="email-container">
 		                        <tr>
                           <td width="100%" align="left" valign="top">
@@ -242,21 +308,67 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
 					&nbsp;
 				</td>
 			</tr>
-	
-			<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="180" style="max-width: 680px;">		
-		    	<tr>
-		    		<td style="padding: 40px 0 0 0;">
-		    			<a href="https://www.facebook.com/secretshopper" target="_blank"><img src="https://www.secretshopper.com/images/facebook.gif" width="38" height="38" alt="Facebook" title="Facebook" border="0" /></a>
-                    </td>
-                    <td align="center" style="padding: 40px 0 0 0;">
-                    	<a href="https://twitter.com/secretshopper/" target="_blank"><img src="https://www.secretshopper.com/images/twitter.gif" width="38" height="38" alt="Twitter" title="Twitter" border="0" /></a>
-                    </td>
-                    <td align="right" style="padding: 40px 0 0 0;">
-                    	<a href="https://plus.google.com/+becomesecretshopper" target="_blank"><img src="https://www.secretshopper.com/images/googlePlus.gif" width="38" height="38" alt="Google Plus" title="Vimeo" border="0" /></a>
-                    </td>                                        
-                </tr>                                      
-			</table>
       </div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script  src="./script.js"></script>
+      </div>
+    
+      <footer>
+        
+        <div class="wrapper">
+          
+          <div class="footer-left">
+            <a href="/">
+              <img src="https://i.postimg.cc/tTxjZ7MF/biology.png" alt="logo">
+          </div>
+            
+            <p class="footer-links">
+              
+              <a href="#">About</a>
+              <a href="#">Services</a>
+              <a href="#">Pricing</a>
+              <a href="#">Contact</a>
+              
+            </p>
+            
+            <p class="footer-company-name">Gene.ly &copy;2013 Unipath. All Rights Reserved</p>
+              
+          <div class="footer-center">
+            
+            <div><i class="fas fa-map-marker-alt"></i>
+              <p><span> 1234 Sawtelle Rd.</span>Los Angeles, CA 90025</p></div>
+            
+            <div><i class="fas fa-phone"></i>
+              <p><span> (012) 345 6789</p></div>
+                
+              <div><i class="fas fa-envelope"></i>
+                <p><a href="#">website@unipath.com</a></p>
+            </div>
+               </div>
+            
+          <div class="footer-right">
+            <p class="footer-connect">
+              <span>Connect with us</span>
+              Consume out of the box genetic Analytics anywhere, anytime. Contact us to get Started. 
+            </p>
+            <div class="footer-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+               </div>
+        </div>
+      </footer>
+      
+      <!-- Footer END -->
+      
+        
+
+     
+    </body>
+</html>
+<!-- partial -->
+  <script  src="./ich.js"></script>
+
 </body>
 </html>

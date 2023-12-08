@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 }
 
 // Fonction pour mettre à jour une formation
-function updateFormation($id_formation, $nom, $ispaid, $datedebut, $niveau, $image_url, $nbheures, $type_cours, $nature_cours, $domaine, $id_typeformation)
+function updateFormation($id_formation, $nom, $ispaid, $datedebut, $niveau, $image_url, $nbheures, $type_cours, $nature_cours, $domaine, $id_typeformation,$location,$email)
 {
     global $conn;
 
@@ -31,6 +31,9 @@ function updateFormation($id_formation, $nom, $ispaid, $datedebut, $niveau, $ima
     $type_cours = mysqli_real_escape_string($conn, $type_cours);
     $nature_cours = mysqli_real_escape_string($conn, $nature_cours);
     $domaine = mysqli_real_escape_string($conn, $domaine);
+    $location = mysqli_real_escape_string($conn, $location);
+    $email = mysqli_real_escape_string($conn, $email);
+
     $sql = "UPDATE formation 
             SET nom='$nom', 
                 ispaid='$ispaid', 
@@ -41,7 +44,9 @@ function updateFormation($id_formation, $nom, $ispaid, $datedebut, $niveau, $ima
                 type_cours='$type_cours', 
                 nature_cours='$nature_cours', 
                 domaine='$domaine', 
-                id_typeformation='$id_typeformation' 
+                id_typeformation='$id_typeformation' ,
+                location='$location',
+                email='$email'
             WHERE id_formation=$id_formation";
 
     // Exécution de la requête
@@ -64,9 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type_cours = $_POST["type_cours"];
     $nature_cours = $_POST["nature_cours"];
     $domaine = $_POST["domaine"];
+    $location = $_POST["location"];
+    $email = $_POST["email"];
+
     $id_typeformation = $typeformationC->getTypeFormationIdByDomaine($domaine);
     // Mettez ici le code pour appeler la fonction de mise à jour
-    updateFormation($id_formation, $nom, $ispaid, $datedebut, $niveau, $image_url, $nbheures, $type_cours, $nature_cours, $domaine, $id_typeformation);
+    updateFormation($id_formation, $nom, $ispaid, $datedebut, $niveau, $image_url, $nbheures, $type_cours, $nature_cours, $domaine, $id_typeformation,$location,$email);
     header('location: newcrudview.php');
     // Mettez ici le code pour rediriger l'utilisateur ou afficher un message de succès
 }
@@ -90,6 +98,9 @@ if ($result_formation->num_rows > 0) {
     $domaine_formation = $row_formation["domaine"];
     $id_typeformation_formation = $row_formation["id_typeformation"];
     $id_formation_formation = $row_formation["id_formation"];
+    $location_formation = $row_formation["location"];
+    $email_formation = $row_formation["email"];
+
 } else {
     // Gérer le cas où la formation n'est pas trouvée
     echo "Formation non trouvée.";
@@ -148,8 +159,6 @@ if ($result_formation->num_rows > 0) {
         <label for="image_url">Image_url:</label>
         <input type="text" name="image_url" id="image_url" value="<?php echo $image_url_formation; ?>">
         </div>
-       
-    
         <div class="survey-element" id="survey-hours">
         <label for="nbheures">Nb d'heures:</label>
         <input type="number" name="nbheures" id="nbheures" value="<?php echo $nbheures_formation; ?>">
@@ -183,6 +192,14 @@ if ($result_formation->num_rows > 0) {
         ?>
     </select>
 </div>
+<div class="survey-element" id="survey-hours">
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location" value="<?php echo $location_formation; ?>">
+ </div>
+ <div class="survey-element" id="survey-hours">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" value="<?php echo $email_formation; ?>">
+ </div>
         <div class="survey-element" id="survey-nature">
         <input type="hidden" name="id_typeformation" id="id_typeformation">
         </div>

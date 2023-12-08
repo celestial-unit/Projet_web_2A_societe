@@ -10,9 +10,13 @@
         private ?string $nature_cours= null;
         private ?string $id_typeformation= null;
         private ?string $domaine = null;
-       // private ?string $description = null;
+        private ?string $location = null;
        private ?string $id_formation= null;
-        public function __construct($id_typeformation, $Nom,$ispaid,$niveau,$image_url,$nbheures,$type_cours,$nature_cours,$datedebut,$domaine,$id_formation)
+       private ?string $tel= null;
+       private ?string $email= null;
+
+
+        public function __construct($id_typeformation, $Nom,$ispaid,$niveau,$image_url,$nbheures,$type_cours,$nature_cours,$datedebut,$domaine,$id_formation,$location,$tel,$email)
         {
           
             $this->id_typeformation = $id_typeformation;
@@ -26,6 +30,9 @@
             $this->datedebut = $datedebut;
             $this->domaine = $domaine;
             $this->id_formation = $id_formation;
+            $this->location = $location;
+            $this->tel = $tel;
+            $this->email = $email;
 
            // $this->description = $description;
         }
@@ -38,6 +45,36 @@
     public function getid_typeformation()
     {
         return $this->id_typeformation;
+    }
+    public function setlocation($location)
+    {
+        $this->location = $location;
+        return $this;
+      
+    }
+    public function getlocation()
+    {
+        return $this->location;
+    }
+    public function settel($tel)
+    {
+        $this->location = $tel;
+        return $this;
+      
+    }
+    public function gettel()
+    {
+        return $this->tel;
+    }
+    public function setemail($email)
+    {
+        $this->email = $email;
+        return $this;
+      
+    }
+    public function getemail()
+    {
+        return $this->email;
     }
     public function setNom($Nom)
     {

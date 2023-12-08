@@ -5,7 +5,7 @@ include '../model/formation.php';
 class formationC{
     public function afficherFormation()
 {
-    $sql = "SELECT formation.id_formation, formation.Nom, formation.ispaid,formation.datedebut,formation.Niveau, formation.type_cours, formation.nbheures, formation.niveau,formation.image_url,formation.nature_cours, 
+    $sql = "SELECT formation.id_formation, formation.Nom, formation.ispaid,formation.datedebut,formation.Niveau, formation.type_cours, formation.nbheures, formation.niveau,formation.image_url,formation.nature_cours,formation.location,formation.email,formation.tel,
     typeformation.id_typeformation, typeformation.description, typeformation.domaine
 FROM formation
 INNER JOIN typeformation ON formation.id_typeformation = typeformation.id_typeformation";
@@ -39,13 +39,9 @@ public function showFormation($id_formation) {
     $stmt->execute();
 
     $formationData = $stmt->fetch(PDO::FETCH_ASSOC);
-
     $db = null;
     return $formationData;
 }
-
-
-
 public function getAllTypesFormation() {
     $db = config::getConnexion();
     try {

@@ -1,4 +1,26 @@
+<?php
+require '../config.php';
+$db = config::getConnexion();
 
+$sqlStatistics = "SELECT tf.domaine, COUNT(f.id_formation) as count
+                  FROM typeformation tf
+                  LEFT JOIN formation f ON tf.id_typeformation = f.id_typeformation
+                  GROUP BY tf.domaine";
+$resultStatistics = $db->query($sqlStatistics);
+
+$statisticsData = array('labels' => array(), 'data' => array());
+
+if ($resultStatistics) {
+    while ($rowStatistics = $resultStatistics->fetch(PDO::FETCH_ASSOC)) {
+        $statisticsData['labels'][] = $rowStatistics['domaine'];
+        $statisticsData['data'][] = intval($rowStatistics['count']);
+    }
+} else {
+    // Gérer l'erreur si la requête échoue
+    echo json_encode(array('error' => 'Erreur dans la requête : ' . $db->errorInfo()));
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -178,10 +200,7 @@
 
     <tbody>
         <?php
-        // Inclure le fichier de connexion à la base de données
-        require '../config.php'; // Assurez-vous de renseigner le bon chemin
-        $db = config::getConnexion();
-        // Sélectionner les données de la table "formation"
+      
         $sql = "SELECT nom, ispaid, nature_cours FROM formation";
         $result = $db->query($sql);
         $row = $result->fetch(PDO::FETCH_ASSOC);
@@ -287,18 +306,7 @@
                 
                 <table>
                     <li>
-    
-                        <canvas id="myChart" width="10" height="10" position="fixed"></canvas>
-        
-
-                    </li>
-                    <li>
-                    
-                        <canvas id="Chart" width="100" height="100" position="fixed"></canvas>
-                  
-
-                    <li>
-                        <img src="https://blog.hubspot.com/hs-fs/hubfs/copy-template-slide-pie-chart%20(7).jpg?width=975&height=549&name=copy-template-slide-pie-chart%20(7).jpg" alt="stats">
+                    <canvas id="formationChart"></canvas>
                     </li>
                 </table>
             </div>
@@ -316,69 +324,38 @@
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-
-        var pourcentageEtudiants = <?php echo $pourcentageEtudiants; ?>;
-        var pourcentageRecruteurs = <?php echo $pourcentageRecruteurs; ?>;
-
-        var data = {
-            labels: ['Students', 'recruiter'],
-            datasets: [{
-                data: [pourcentageEtudiants, pourcentageRecruteurs],
-                backgroundColor: ['#D2B48C', '#C3E6CB']
-            }]
-        };
-
-        var options = {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Rate of the Number of Students and Recruiters in UNIPATH',
-                    font: {
-                        size: 16
-                    }
-                }
-            }
-        }
-
-        var myChart = new Chart(ctx, {
-            type: 'pie',
-            data: data,
-            options:options,
+    
+document.addEventListener('DOMContentLoaded', function() {
+            createFormationChart(<?php echo json_encode($statisticsData); ?>);
         });
 
-    var ctxx = document.getElementById('Chart').getContext('2d');
-    var pourcentageabled = <?php echo $pourcentageabled; ?>;
-    var pourcentagedisabled = <?php echo $pourcentagedisabled ; ?>;
-    var data = {
-        labels: ['Abled Account', 'Disabled Account'],
-        datasets: [{
-            data: [pourcentageabled, pourcentagedisabled],
-            backgroundColor: ['#F7F7DC', '#C3E6CB'] // Couleurs adaptées selon les besoins
-        }]
-    };
-    var options = {
-    plugins: {
-        title: {
-            display: true,
-            text: 'Rate of Abled and Disabled Accounts in UNIPATH',
-            font: {
-                size: 16
-            }
+        function createFormationChart(statisticsData) {
+            var ctx = document.getElementById('formationChart').getContext('2d');
+
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: statisticsData.labels,
+                    datasets: [{
+                        label: 'Nombre de formations',
+                        data: statisticsData.data,
+                        backgroundColor: 'rgb(123, 67, 39)', // Utiliser la couleur spécifiée
+                        borderColor: 'rgb(123, 67, 39)',   // Utiliser la couleur spécifiée pour la bordure
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
         }
-    }
-}
-
-    var myChart = new Chart(ctxx, {
-        type: 'bar', // Changement du type de graphique à 'bar'
-        data: data,
-        options:options,
-    });
-
-
-
-    function ajusterTailleGraphique()
+        function ajusterTailleGraphique()
      {
     var largeurGraphique = 30; // Définissez la largeur souhaitée en pixels
     var hauteurGraphique = 30; // Définissez la hauteur souhaitée en pixels
