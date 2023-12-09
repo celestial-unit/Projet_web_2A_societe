@@ -4,6 +4,61 @@ require 'C:\wamp64\www\Stage\config.php';
 
 class sta
 {
+
+    public function getCapaciteByDomainStatistics()
+    {
+        $db = config::getConnexion();
+
+        $tableName = 'stage';
+        $checkTableQuery = "SHOW TABLES LIKE '$tableName'";
+        $tableExists = $db->query($checkTableQuery)->fetchColumn();
+
+        if (!$tableExists) {
+            die("Error: Table '$tableName' does not exist.");
+        }
+
+        $sql = "SELECT Domaine, SUM(capacite) AS total_capacite
+                FROM stage
+                GROUP BY Domaine";
+
+        try {
+            $statistics = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            return $statistics;
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
+
+   
+    public function getTypeStageStatisticsWithNomTypes()
+    {
+        $db = config::getConnexion();
+
+        $tableName = 'stage';
+        $checkTableQuery = "SHOW TABLES LIKE '$tableName'";
+        $tableExists = $db->query($checkTableQuery)->fetchColumn();
+
+        if (!$tableExists) {
+            die("Error: Table '$tableName' does not exist.");
+        }
+
+        $sql = "SELECT type_stage, COUNT(*) AS type_count, type_stage.nom_types
+                FROM stage
+                LEFT JOIN type_stage ON stage.type_stage = type_stage.id_types
+                GROUP BY type_stage";
+
+        try {
+            $statistics = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            return $statistics;
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
+
+    // ... Other functions ...
+
+
+
     public function liststage()
     {
         $sql = "SELECT stage.*, type_stage.nom_types AS type_stage
@@ -124,5 +179,21 @@ class sta
             echo ('error' . $e->getMessage());
         }
     }
+    public function countStages()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM stage";
+        $db = config::getConnexion();
+
+        try {
+            $stmt = $db->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['total'];
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+    
 }
+    
 ?>
