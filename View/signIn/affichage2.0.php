@@ -204,7 +204,7 @@ include("../../Controller/sign.php");
             </div>
             <!-- ======================= Cards ================== -->
             <h1>Users List</h1>
-    <div class="action-buttons">
+        <div class="action-buttons">
         <button class="return" id="return">Return</button>
         <button class="add" id="add">Add/edit User</button>
         <button class="delete" id="delete">Delete User</button>

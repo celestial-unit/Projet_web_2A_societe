@@ -346,7 +346,7 @@ function verifierProfil()
         // Utiliser la variable JavaScript
         if (champsRempli) 
         {
-            window.location.href = 'page_affichage_recruteur.php';//aziz izid historique des stages recemment habtou
+            window.location.href = '../front/typestage.php';//aziz izid historique des stages recemment habtou
         } else {
             window.location.href = 'formsupprecruteur.html';
         }

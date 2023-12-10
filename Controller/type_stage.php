@@ -1,6 +1,6 @@
 <?php
 
-require 'C:\wamp64\www\Projet_web_2A_societe\config.php';
+require 'C:\wamp64\www\Projet_web_2A_societe\Projet_web_2A_societe\config.php';
 
 class type_s
 {

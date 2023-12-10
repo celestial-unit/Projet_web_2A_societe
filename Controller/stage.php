@@ -1,6 +1,6 @@
 <?php
 
-require 'C:\wamp64\www\Projet_web_2A_societe\Controller\sign.php';
+require 'sign.php';
 
 class sta
 {

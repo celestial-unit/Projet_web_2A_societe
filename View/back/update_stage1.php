@@ -40,7 +40,9 @@ if (
             new DateTime($_POST['date_d'])
         );
         $staa->updatestage($client, $_POST["id_stage"]);
-        header('Location: stage_Back.php');
+
+
+        header('Location: ../front/afficher_stage.php');
         exit(); // Add exit to stop further execution after redirection
     } else {
         $error = "Missing information";
@@ -196,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         if ($conn->query($sql) === TRUE) {
             // Record updated successfully, redirect to stage_Back.php
-            header('Location: stage_Back.php');
+            header('Location: ../front/afficher_stage.php');
             exit(); // Add exit to stop further execution after redirection
         } else {
             echo "Error updating record: " . $conn->error;
@@ -243,7 +245,7 @@ if ($result->num_rows > 0) {
 
 <script>
     function goBack() {
-        window.location.href = 'stage_Back.php';
+        window.location.href = '../front/afficher_stage.php'
     }
 </script>
     
