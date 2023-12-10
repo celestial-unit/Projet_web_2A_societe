@@ -99,6 +99,9 @@ $tab=$fc->affichertypeFormation();
     </div>
   </div>
 </div>
+<div class="action-buttons">
+        <button class="return" id="return">Return</button>
+</div>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script><script  src="./scriptnew.js"></script>
 <script>
@@ -139,6 +142,9 @@ $(document).ready(function(){
     $(".pagination li:contains('" + page + "')").addClass("active");
   });
 });
+document.getElementById('return').onclick = function() {
+        window.location.href = './signIn/chose_crudtraining.php';
+    };
 </script>
 </body>
 </html>

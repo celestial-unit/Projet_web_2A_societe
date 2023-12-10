@@ -1,6 +1,6 @@
 <?php
 
-class Config
+class c
 {
 
     public static function getConnexion()
@@ -28,7 +28,7 @@ class Config
 
 
 
+$pdo=c::getConnexion();
 
 
 
-$pdo=Config::getConnexion();
