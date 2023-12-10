@@ -437,7 +437,7 @@ function getCapaciteByDomainStatistics($db)
             labels: ['Students', 'recruiter'],
             datasets: [{
                 data: [pourcentageEtudiants, pourcentageRecruteurs],
-                backgroundColor: ['#D2B48C', '#C3E6CB']
+                backgroundColor: ['#D2B48C', '#F5F5DC']
             }]
         };
 
@@ -466,7 +466,7 @@ function getCapaciteByDomainStatistics($db)
         labels: ['Abled Account', 'Disabled Account'],
         datasets: [{
             data: [pourcentageabled, pourcentagedisabled],
-            backgroundColor: ['#F7F7DC', '#C3E6CB'] // Couleurs adaptées selon les besoins
+            backgroundColor: ['#F5F5DC', '#D2B48C'] // Couleurs adaptées selon les besoins
         }]
     };
     var options = {
@@ -503,8 +503,8 @@ function getCapaciteByDomainStatistics($db)
                     datasets: [{
                         label: 'Nombre de formations',
                         data: statisticsData.data,
-                        backgroundColor: 'rgb(123, 67, 39)', // Utiliser la couleur spécifiée
-                        borderColor: 'rgb(123, 67, 39)',   // Utiliser la couleur spécifiée pour la bordure
+                        backgroundColor: 'rgba(139, 69, 19, 0.2)',
+borderColor: 'rgba(139, 69, 19, 1)',   // Utiliser la couleur spécifiée pour la bordure
                         borderWidth: 1
                     }]
                 },
@@ -524,13 +524,19 @@ function getCapaciteByDomainStatistics($db)
      {
     var largeurGraphique = 30; // Définissez la largeur souhaitée en pixels
     var hauteurGraphique = 30; // Définissez la hauteur souhaitée en pixels
-
+    var largeurGraphique1 = 10; // Définissez la largeur souhaitée en pixels
+    var hauteurGraphique1 = 5; // Définissez la hauteur souhaitée en pixels
+    
    
     // Modifiez le style du conteneur du graphique
     document.getElementById('myChart').style.width = largeurGraphique + 'px';
     document.getElementById('myChart').style.height = hauteurGraphique + 'px';
     document.getElementById('Chart').style.width = largeurGraphique + 'px';
     document.getElementById('Chart').style.height = hauteurGraphique + 'px';
+    document.getElementById('formationChart').style.width = largeurGraphique1 + 'px';
+    document.getElementById('formationChart').style.height = hauteurGraphique1+ 'px';
+    document.getElementById('nomTypesChart').style.width = largeurGraphique1 + 'px';
+    document.getElementById('nomTypesChart').style.height = hauteurGraphique1 + 'px';
      }
 
 // Appelez la fonction pour ajuster la taille du graphique
@@ -553,8 +559,8 @@ var statisticsData = <?php echo json_encode($statistics); ?>;
                     datasets: [{
                         label: 'Nom Types Statistics',
                         data: data,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(205, 133, 63, 0.2)',
+borderColor: 'rgba(205, 133, 63, 1)',
                         borderWidth: 1
                     }]
                 },

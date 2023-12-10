@@ -19,8 +19,8 @@ include("../Model/clubConnect.php");
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
-            <ul>
-            <li>
+        <ul>
+                <li>
                     <a href="../front/front_office.html">
                         <span class="icon">  
                         </span>
@@ -38,7 +38,7 @@ include("../Model/clubConnect.php");
                 </li>
 
                 <li>
-                    <a href="affichage2.0.php">
+                    <a href="signIn/affichage2.0.php">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -47,7 +47,7 @@ include("../Model/clubConnect.php");
                 </li>
 
                 <li>
-                    <a href="chose_intership.php">
+                    <a href="signIn/chose_intership.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -56,7 +56,7 @@ include("../Model/clubConnect.php");
                 </li>
 
                 <li>
-                    <a href="../AdminDash.php">
+                    <a href="AdminDash.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -64,7 +64,7 @@ include("../Model/clubConnect.php");
                     </a>
                 </li>
                 <li>
-                    <a href="chose_crudtraining.php">
+                    <a href="signIn/chose_crudtraining.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>

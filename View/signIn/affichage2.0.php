@@ -121,7 +121,7 @@ include("../../Controller/sign.php");
     <div class="container">
     
         <div class="navigation">
-            <ul>
+        <ul>
                 <li>
                     <a href="../front/front_office.html">
                         <span class="icon">  
@@ -149,7 +149,7 @@ include("../../Controller/sign.php");
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="chose_intership.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -158,7 +158,7 @@ include("../../Controller/sign.php");
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="../AdminDash.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -166,7 +166,7 @@ include("../../Controller/sign.php");
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="chose_crudtraining.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
