@@ -70,14 +70,7 @@ echo '</script>';
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
-                        </span>
-                        <span class="title">Messages</span>
-                    </a>
-                </li>
+                
 
                 <li>
                     <a href="../faq/faq_recruteur.html">

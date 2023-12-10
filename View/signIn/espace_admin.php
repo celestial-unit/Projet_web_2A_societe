@@ -1,5 +1,10 @@
 <?php
 session_start();
+//aziz
+//require '../../Controller/stage.php';
+//$sta = new sta();
+//$statistics = $sta->getTypeStageStatisticsWithNomTypes();
+
 include("../../Model/authenticate.php");
 include("../../Controller/sign.php");
 $pdo = Config::getConnexion(); // Assurez-vous d'avoir une connexion PDO
@@ -44,6 +49,72 @@ $nombredisabled = $disabled->fetchColumn();
 //stat
 $pourcentageabled= ($nombreabled / $totalUtilisateurs) * 100;
 $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
+
+
+//emna 
+$sqlStatistics = "SELECT tf.domaine, COUNT(f.id_formation) as count
+                  FROM typeformation tf
+                  LEFT JOIN formation f ON tf.id_typeformation = f.id_typeformation
+                  GROUP BY tf.domaine";
+$resultStatistics = $pdo->query($sqlStatistics);
+
+$statisticsData = array('labels' => array(), 'data' => array());
+
+if ($resultStatistics) {
+    while ($rowStatistics = $resultStatistics->fetch(PDO::FETCH_ASSOC)) {
+        $statisticsData['labels'][] = $rowStatistics['domaine'];
+        $statisticsData['data'][] = intval($rowStatistics['count']);
+    }
+} else {
+    // Gérer l'erreur si la requête échoue
+    echo json_encode(array('error' => 'Erreur dans la requête : ' . $pdo->errorInfo()));
+}
+
+//aziz 
+function getCapaciteByDomainStatistics($db)
+    {
+        $tableName = 'stage';
+        $checkTableQuery = "SHOW TABLES LIKE '$tableName'";
+        $tableExists = $db->query($checkTableQuery)->fetchColumn();
+
+        if (!$tableExists) {
+            die("Error: Table '$tableName' does not exist.");
+        }
+
+        $sql = "SELECT Domaine, SUM(capacite) AS total_capacite
+                FROM stage
+                GROUP BY Domaine";
+
+        try {
+            $statistics = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            return $statistics;
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
+    function getTypeStageStatisticsWithNomTypes($db)
+    {
+        $tableName = 'stage';
+        $checkTableQuery = "SHOW TABLES LIKE '$tableName'";
+        $tableExists = $db->query($checkTableQuery)->fetchColumn();
+
+        if (!$tableExists) {
+            die("Error: Table '$tableName' does not exist.");
+        }
+
+        $sql = "SELECT type_stage, COUNT(*) AS type_count, type_stage.nom_types
+                FROM stage
+                LEFT JOIN type_stage ON stage.type_stage = type_stage.id_types
+                GROUP BY type_stage";
+
+        try {
+            $statistics = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            return $statistics;
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
+    $statistics = getTypeStageStatisticsWithNomTypes($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +125,7 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="../signIn/compte_etudiant.css">
+    <link rel="stylesheet" href="../signIn/espace_admin.css">
 </head>
 
 <body>
@@ -91,7 +162,7 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="chose_intership.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -100,7 +171,7 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="../AdminDash.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -108,7 +179,7 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="chose_crudtraining.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -196,13 +267,12 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                 </div>
             </div>
               <!-- ================ Order Details List ================= -->
-            <div class="details">
+              <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Recent Orders</h2>
                         <a href="#" class="btn">View All</a>
                     </div>
-
                     <table>
                         <thead>
                             <tr>
@@ -211,59 +281,51 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                                 <td>Status</td>
                             </tr>
                         </thead>
+                    <tbody>
+                        
+                            <?php
+                            $pdo = Config::getConnexion(); // Assurez-vous d'avoir une connexion PDO
 
-                        <tbody>
-                            <tr>
-                                <td>David</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">abled</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Julia</td>
-                                <td>Not paid</td>
-                                <td><span class="status pending">abled</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Mariem</td>
-                                <td>Paid</td>
-                                <td><span class="status return">disabled</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Zied</td>
-                                <td>Paid</td>
-                                <td><span class="status inProgress">abled</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Hejer</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">abled</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>fedi</td>
-                                <td>not paid</td>
-                                <td><span class="status pending">abled</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>yassine</td>
-                                <td>Paid</td>
-                                <td><span class="status return">disabled</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>olfa</td>
-                                <td>Paid</td>
-                                <td><span class="status inProgress">abled</span></td>
-                            </tr>
+                            $sql = "SELECT Nom, ispaid, nature_cours FROM formation";
+                            $result = $pdo->query($sql);
+                            
+                            if ($result) {
+                                $statusColors = array(
+                                    'normal' => 'status-normal',
+                                    'accelerated' => 'status-accelerated',
+                                    // Ajoutez d'autres valeurs de status avec leurs classes CSS correspondantes
+                                );
+                            
+                                echo "<table>"; // Ajout d'une balise <table> pour afficher les résultats dans un tableau
+                            
+                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                    $name = $row["Nom"];
+                                    $ispaid = $row["ispaid"];
+                                    $nature_cours = $row["nature_cours"];
+                            
+                                    // Déterminer la classe de statut en fonction de la valeur de "nature_cours"
+                                    $statusClass = isset($statusColors[$nature_cours]) ? $statusColors[$nature_cours] : '';
+                            
+                                    // Afficher une ligne dans le tableau pour chaque enregistrement
+                                    echo "<tr>";
+                                    echo "<td>$name</td>";
+                                    echo "<td>" . (($ispaid == 1) ? 'Paid' : 'Free') . "</td>";
+                                    echo "<td><span class='status $statusClass'>$nature_cours</span></td>";
+                                    echo "</tr>";
+                                }
+                            
+                                echo "</table>"; // Fermeture de la balise <table>
+                            } else {
+                                // Gestion des erreurs de requête
+                                die("Erreur dans la requête : " . $pdo->errorInfo()[2]);
+                            }
+                            ?>
+    
                         </tbody>
                     </table>
                 </div>
                 
+
 
                 <!-- ================= New Customers ================ -->
                 <div class="recentCustomers">
@@ -331,19 +393,24 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
                 
                 <table>
                     <li>
-    
                         <canvas id="myChart" width="10" height="10" position="fixed"></canvas>
         
-
                     </li>
                     <li>
-                    
                         <canvas id="Chart" width="100" height="100" position="fixed"></canvas>
-                  
+                    </li>
+                    
+                    <li>
+                        <canvas id="formationChart"></canvas>
+                    </li>
 
                     <li>
-                        <img src="https://blog.hubspot.com/hs-fs/hubfs/copy-template-slide-pie-chart%20(7).jpg?width=975&height=549&name=copy-template-slide-pie-chart%20(7).jpg" alt="stats">
+                        <canvas id="nomTypesChart"></canvas>
                     </li>
+
+                    
+                    
+            
                 </table>
             </div>
         </div>
@@ -421,6 +488,37 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
     });
 
 
+    //emna 
+    document.addEventListener('DOMContentLoaded', function() {
+            createFormationChart(<?php echo json_encode($statisticsData); ?>);
+        });
+
+        function createFormationChart(statisticsData) {
+            var ctx = document.getElementById('formationChart').getContext('2d');
+
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: statisticsData.labels,
+                    datasets: [{
+                        label: 'Nombre de formations',
+                        data: statisticsData.data,
+                        backgroundColor: 'rgb(123, 67, 39)', // Utiliser la couleur spécifiée
+                        borderColor: 'rgb(123, 67, 39)',   // Utiliser la couleur spécifiée pour la bordure
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+
 
     function ajusterTailleGraphique()
      {
@@ -437,6 +535,37 @@ $pourcentagedisabled= ($nombredisabled / $totalUtilisateurs) * 100;
 
 // Appelez la fonction pour ajuster la taille du graphique
 ajusterTailleGraphique();
+
+//aziz chart 
+
+var statisticsData = <?php echo json_encode($statistics); ?>;
+            
+            // Extract labels and data for Chart.js
+            var labels = statisticsData.map(statistic => statistic.nom_types);
+            var data = statisticsData.map(statistic => statistic.type_count);
+
+            // Create a bar chart
+            var ctx = document.getElementById('nomTypesChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nom Types Statistics',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
     </script>
 </body>
 </html>

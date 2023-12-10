@@ -51,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
                 'Diplome' => $user['Diplome'],
                 'Niveau' => $user['Niveau'],
                 'Role' => $user['Role'],
-                'Status' => $user['Status']
+                'Status' => $user['Status'],
+                'image' => $user['image']
             );
             $_SESSION['recruteur'] = array(
                 'Nom' => $recruteur['Nom'],
