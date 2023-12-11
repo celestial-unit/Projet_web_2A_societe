@@ -1,12 +1,35 @@
 <?php
-include '../../controler/stage.php';
-$c = new sta();
-$tab = $c->liststage();
+// Replace these variables with your database credentials
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "unipath_db";
 
-$sta = new sta();
-$statistics = $sta->getCapaciteByDomainStatistics();
+try {
+    // Create a PDO connection to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+
+    // Set the PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Query to get the count of each reclamation type with the corresponding nom_type
+    $query = "SELECT tr.nom_type, COUNT(*) AS count FROM reclamation r
+              JOIN type_rec tr ON r.type_reclamation = tr.id_type
+              GROUP BY r.type_reclamation";
+    $stmt = $pdo->query($query);
+
+    // Fetch the data and store it in an associative array
+    $data = array();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[$row['nom_type']] = $row['count'];
+    }
+} catch (PDOException $e) {
+    // If an error occurs, set an error message
+    $error = 'Error: ' . $e->getMessage();
+}
 ?>
-<!DOCTYPE html>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,16 +38,74 @@ $statistics = $sta->getCapaciteByDomainStatistics();
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Dashboard</title>
-        <link rel="stylesheet" href="./css/style.css">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+        <!-- ======= Styles ====== -->
+       
+ 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Admin Dashboard </title>
     <!-- ======= Styles ====== -->
-    
+   <style>
+    body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.navigation {
+    width: 250px;
+    background-color: #8B4513; /* Brown color */
+    color: #fff;
+    padding-top: 20px;
+}
+
+.navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation li {
+    margin-bottom: 15px;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.navigation .icon {
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 18px;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+#reclamationChartContainer {
+    margin-top: 20px;
+}
+
+#reclamationChart {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+   </style>
 </head>
 
 <body>
@@ -42,7 +123,7 @@ $statistics = $sta->getCapaciteByDomainStatistics();
                 </li>
 
                 <li>
-                    <a href="./back.php">
+                    <a href="#">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -78,7 +159,7 @@ $statistics = $sta->getCapaciteByDomainStatistics();
                 </li>
 
                 <li>
-                    <a href="./stage_Back.php">
+                    <a href="stage.php">
                         <span class="title">departement stage</span>
                     </a>
                 </li>
@@ -102,73 +183,56 @@ $statistics = $sta->getCapaciteByDomainStatistics();
         </div>
 
         <!-- ========================= Main ==================== -->
-       
-        <div class="main">
-        <!-- Create a canvas for the pie chart -->
-        <div style="width: 80%;">
-            <canvas id="capaciteByDomainChart"></canvas>
+            
+        <div id="reclamationChartContainer">
+            <canvas id="reclamationChart"></canvas>
         </div>
 
-        <!-- Create a script to generate the pie chart using Chart.js -->
-        <script>
-            // Extract data from PHP to JavaScript
-            var statisticsData = <?php echo json_encode($statistics); ?>;
             
-            // Extract labels and data for Chart.js
-            var labels = statisticsData.map(statistic => statistic.domain);
-            var data = statisticsData.map(statistic => statistic.total_capacite);
+              <!-- ====== ionicons ======= -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-            // Create a pie chart
-            var ctx = document.getElementById('capaciteByDomainChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: data,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            // Add more colors as needed
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            // Add more colors as needed
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    legend: {
-                        position: 'right'
-                    }
-                }
+        <!-- =========== Scripts =========  -->
+        <script src="assets/js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- ====== ionicons ======= -->
+        <!-- Add this in the head section -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                <?php if (isset($data)) : ?>
+                    // Extract data for the chart
+                    const labels = Object.keys(<?php echo json_encode($data); ?>);
+                    const values = Object.values(<?php echo json_encode($data); ?>);
+
+                    // Create a bar chart
+                    const ctx = document.getElementById('reclamationChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Number of Reclamations',
+                                data: values,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                <?php elseif (isset($error)) : ?>
+                    console.error('Error fetching reclamation data:', '<?php echo $error; ?>');
+                <?php endif; ?>
             });
         </script>
-    </div>
-  
-
-
-      
-            
-            <!-- ====== ionicons ======= -->
-            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-            </body>
-             
-
-    <!-- =========== Scripts =========  -->
-    <script src="assets/js/main.js"></script>
-
-    <!-- ====== ionicons ======= -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</body>
-
+    </body>
 </html>
-

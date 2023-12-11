@@ -81,6 +81,15 @@ echo '</script>';
                 </li>
 
                 <li>
+                    <a href="choose_complaint.php">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Complaints</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="../front/settings_etudiant.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>

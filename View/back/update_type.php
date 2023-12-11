@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'])) {
                 </li>
 
                 <li>
-                    <a href="../SignIn/espace_admin.php">
+                    <a href="../signIn/espace_admin.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -199,16 +199,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'])) {
                 </li>
 
                 <li>
-                    <a href="../SignIn/affichage2.0.php">
+                    <a href="../signIn/affichage2.0.php">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
                         <span class="title">user management</span>
                     </a>
                 </li>
+                <li>
+                    <a href="../back/reclamation_BACK.php">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Complaint's management</span>
+                    </a>
+                </li>
 
                 <li>
-                    <a href="../SignIn/chose_intership.php">
+                    <a href="../signIn/chose_intership.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -225,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="../SignIn/chose_crudtraining.php">
+                    <a href="../signIn/chose_crudtraining.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -242,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'])) {
                         <span class="title">Sign Out</span>
                     </a>
                 </li>
-            </ul>
+            </ul>   
         </div>
 <center>
 

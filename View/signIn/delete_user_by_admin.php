@@ -85,7 +85,7 @@
                         console.log(response);
                         // Affichez la réponse du serveur (par exemple, un message de succès)
                         alert(response);
-                        window.location.href = 'affichage_users.php';
+                        window.location.href = 'affichage2.0.php';
                     },
                     error: function (error) {
                         console.error('Erreur lors de la suppression d\'utilisateur:', error);

@@ -304,14 +304,14 @@ body {
 .details table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 .details table thead td {
-  font-weight: 100;
+  font-weight: 600;
 }
 .details .recentOrders table tr {
   color: var(--black1);
-  border-bottom: 1px solid rgba(255, 8, 8, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .details .recentOrders table tr:last-child {
   border-bottom: none;
@@ -321,7 +321,7 @@ body {
   color: var(--white);
 }
 .details .recentOrders table tr td {
-  padding: 100px;
+  padding: 10px;
 }
 .details .recentOrders table tr td:last-child {
   text-align: end;
@@ -497,70 +497,6 @@ body {
         text-align: left;
         border-bottom: 1px solid #ddd; /* Optional: Add a border between rows */
     }
-   body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-        }
 
-        .container {
-            display: flex;
-        }
 
-        .navigation {
-            width: 20%; /* Adjust the width as needed */
-            background-color: #333;
-            color: white;
-            padding: 20px;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 20px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #333;
-            color: white;
-        }
-        
-    .navigation-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #333; /* Adjust the background color as needed */
-      z-index: 1000; /* Adjust the z-index as needed */
-  }
-
-  .container {
-      margin-top: 50px; /* Adjust the top margin to leave space for the fixed navigation */
-  }
-
-  table {
-      width: 50%;
-      margin: auto;
-      background-color: #FDF5E6;
-      border-collapse: collapse;
-      margin-top: 20px;
-  }
-
-  th,
-  td {
-      border: 1px solid #000;
-      padding: 10px;
-      text-align: center;
-  }
-  
 }

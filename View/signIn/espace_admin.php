@@ -7,12 +7,56 @@ session_start();
 
 include("../../Model/authenticate.php");
 include("../../Controller/sign.php");
+//include("../../Controller/formationC.php");
 $pdo = Config::getConnexion(); // Assurez-vous d'avoir une connexion PDO
 $personne = new Personne();
+//$formation=new formationC();
 $userCount = $personne->countUsers($pdo);
 $email =$_SESSION['admin']['Email'];
 $token = $_SESSION['admintoken']; // Assurez-vous que vous avez le token de réinitialisation
 $resultatVerification = verifierTokenReinitialisation($email, $pdo);
+ function countTraining($pdo)
+    {
+        try {
+            // Préparez la requête SQL pour compter le nombre d'utilisateurs
+            $query = "SELECT COUNT(*) as trainingCount FROM formation";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+
+            // Récupérez le résultat
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Retournez le nombre d'utilisateurs
+            return isset($result['trainingCount']) ? (int)$result['trainingCount'] : 0;
+        } catch (PDOException $e) {
+            // Gérer les erreurs de base de données
+            error_log('Erreur : ' . $e->getMessage());
+            return 0; // Retourner 0 en cas d'erreur
+        }
+    }
+
+$trainingCount =countTraining($pdo);
+
+function countClub($pdo)
+    {
+        try {
+            // Préparez la requête SQL pour compter le nombre d'utilisateurs
+            $query = "SELECT COUNT(*) as ClubCount FROM club";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+
+            // Récupérez le résultat
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Retournez le nombre d'utilisateurs
+            return isset($result['ClubCount']) ? (int)$result['ClubCount'] : 0;
+        } catch (PDOException $e) {
+            // Gérer les erreurs de base de données
+            error_log('Erreur : ' . $e->getMessage());
+            return 0; // Retourner 0 en cas d'erreur
+        }
+    }
+    $ClubCount =countClub($pdo);
 //token non valide
 if (!$resultatVerification) 
 {
@@ -160,6 +204,14 @@ function getCapaciteByDomainStatistics($db)
                         <span class="title">user management</span>
                     </a>
                 </li>
+                <li>
+                    <a href="../back/reclamation_BACK.php">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Complaint's management</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="chose_intership.php">
@@ -235,8 +287,8 @@ function getCapaciteByDomainStatistics($db)
              <!-- ======================= Cards ================== -->
                 <div class="card">
                     <div>
-                        <div class="numbers">20</div>
-                        <div class="cardName">Intership sharing</div>
+                        <div class="numbers"><?php echo $trainingCount; ?></div>
+                        <div class="cardName">Training sharing</div>
                     </div>
 
                     <div class="iconBx">
@@ -246,7 +298,7 @@ function getCapaciteByDomainStatistics($db)
 
                 <div class="card">
                     <div>
-                        <div class="numbers">100</div>
+                        <div class="numbers"><?php echo $ClubCount; ?></div>
                         <div class="cardName">club sharing</div>
                     </div>
 

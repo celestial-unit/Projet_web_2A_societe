@@ -191,6 +191,26 @@ public function getweekendclassesFormations() {
     }
 
 }
+public function countTraining($pdo)
+    {
+        try {
+            // Préparez la requête SQL pour compter le nombre d'utilisateurs
+            $query = "SELECT COUNT(*) as trainingCount FROM formation";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+
+            // Récupérez le résultat
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Retournez le nombre d'utilisateurs
+            return isset($result['trainingCount']) ? (int)$result['trainingCount'] : 0;
+        } catch (PDOException $e) {
+            // Gérer les erreurs de base de données
+            error_log('Erreur : ' . $e->getMessage());
+            return 0; // Retourner 0 en cas d'erreur
+        }
+    }
+
 }
 
 ?>

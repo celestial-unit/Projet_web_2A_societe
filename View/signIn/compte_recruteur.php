@@ -52,7 +52,7 @@ echo '</script>';
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
-            <ul>
+        <ul>
                 <li>
                     <a href="../front/front_office.html">
                         <span class="icon">  
@@ -70,10 +70,8 @@ echo '</script>';
                     </a>
                 </li>
 
-                
-
                 <li>
-                    <a href="../faq/faq_recruteur.html">
+                    <a href="../faq/faq.html">
                         <span class="icon">
                             <ion-icon name="help-outline"></ion-icon>
                         </span>
@@ -82,23 +80,24 @@ echo '</script>';
                 </li>
 
                 <li>
-                    <a href="../front/settings_recruteur.php">
+                    <a href="choose_complaint1.php">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Complaints</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../front/settings_etudiant.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
                         <span class="title">Settings</span>
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title" id="delete">Delete account</span>
-                    </a>
-                </li>
 
-                <li id="profileLink1">
+                <li id="profileLink">
                     <a href="#">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>

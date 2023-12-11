@@ -45,6 +45,14 @@ include("../Model/clubConnect.php");
                         <span class="title">user management</span>
                     </a>
                 </li>
+                <li>
+                    <a href="back/reclamation_BACK.php">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Complaint's management</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="signIn/chose_intership.php">

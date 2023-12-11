@@ -136,8 +136,11 @@ if ($result_formation->rowCount() > 0) {
         </div>
 
         <div class="survey-element" id="survey-image">
-        <label for="image_url">Image_url:</label>
-        <input type="text" name="image_url" id="image_url" value="<?php echo $image_url_formation; ?>">
+        <div class="preview">
+          <img id="file-ip-1-preview" style="max-width: 100%; max-height: 200px;">
+        </div>
+        <label for="image_url">Upload Image</label>
+        <input type="file" id="image_url" name="image_url" accept="image/*" onchange="showPreview(event);">
         </div>
         <div class="survey-element" id="survey-hours">
         <label for="nbheures">Nb d'heures:</label>

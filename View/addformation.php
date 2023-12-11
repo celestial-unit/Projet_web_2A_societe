@@ -95,9 +95,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
         <div class="survey-element" id="survey-image">
-        <label for="image_url">Image_url:</label>
+       <!-- <label for="image_url">Image_url:</label>
         <input type="text" name="image_url" id="image_url">
+        </div>-->
+        <div class="preview">
+          <img id="file-ip-1-preview" style="max-width: 100%; max-height: 200px;">
         </div>
+        <label for="image_url">Upload Image</label>
+        <input type="file" id="image_url" name="image_url" accept="image/*" onchange="showPreview(event);">
+        </div>
+
        
     
         <div class="survey-element" id="survey-hours">
@@ -136,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
         <div class="survey-element" id="survey-name">
         <label for="email">Email: </label>
-        <input type="email" name="email" id="email" maxlength="20">
+        <input type="email" name="email" id="email">
         </div>
        <div class="survey-element" >
        <input type="submit" value="Save" id="save">
@@ -148,4 +155,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </form>
 </body>
 <script src="./scriptform.js"></script>
+<script>
+  function showPreview(event){
+    if(event.target.files.length > 0){
+      var src = URL.createObjectURL(event.target.files[0]);
+      var preview = document.getElementById("file-ip-1-preview");
+      preview.src = src;
+      preview.style.display = "block";
+    }
+  }
+</script>
 </html>
