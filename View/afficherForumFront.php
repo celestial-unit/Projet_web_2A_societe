@@ -62,16 +62,32 @@ $tab = $d->afficher();
         <h1> This is a list of <span>Forums</span></h1>
         
             <?php foreach ($tab as $foru) { ?>
-                <?php if($foru['etat'] !== "En Attente"){ ?>
-                <div class="services-web text-center">
-                <div class="col-md-4">
-                    <span class="icon-sprite sprite-web">&nbsp;</span>
-                    <h4><?= $foru['titre'] ?></h4>
-                    <p><?= $foru['description'] ?></p>
-                    <a href="ajouterCommentaireFront.php?id=<?php echo $foru['id']; ?>"><button class="btn">Commenter</button></a>
-                </div>
-                </div><!-- end services web-->
-                <?php } ?>
+              <?php if ($foru['etat'] !== "En Attente"): ?>
+    <div class="services-web text-center">
+        <div style="width:100%;border:#f39c12 3px solid;margin-top:1%;padding-bottom:2%">
+            <span class="icon-sprite sprite-web">&nbsp;</span>
+           <div class="row">
+            <h2 class="text"><?= $foru['titre'] ?></h2> 
+            <h4> <?= $foru['date'] ?></h4>
+            </div>
+
+            <?php
+            
+                $truncatedDescription = substr($foru['description'], 0, 4);
+
+           
+                if (strlen($foru['description']) > 4):
+            ?>
+                <p><?= $truncatedDescription ?>... <a href="detailleforumfront.php?id=<?= $foru['id']; ?>">Voir plus</a></p>
+            <?php else: ?>
+                <p><?= $foru['description'] ?></p>
+            <?php endif; ?>
+
+           
+        </div>
+    </div><!-- end services web-->
+<?php endif; ?>
+
             <?php } ?>
       </div>
     </div>
@@ -351,10 +367,10 @@ $tab = $d->afficher();
   <!-- end footer-->
   
                 
-
+  <script src="./forum.js"></script>
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/144467/bootstrap.min.js"></script>
-  <script src="forum.js"></script>
+
 </body>
 
 </html>
