@@ -35,15 +35,16 @@ class forumC
 
     function ajouter($forum)
     {
-        $sql = "INSERT INTO forum (titre, date, description)
-        VALUES (:titre,:date, :description)";
+        $sql = "INSERT INTO forum (titre, date, description, etat)
+        VALUES (:titre,:date, :description, :etat)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
             $query->execute([
                 'titre' => $forum->getTitre(),
                 'date' => $forum->getDate(),
-                'description' => $forum->getDescription()
+                'description' => $forum->getDescription(),
+                'etat' => $forum->getEtat()
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
@@ -59,14 +60,16 @@ class forumC
                 'UPDATE forum SET 
                     titre = :titre, 
                     date = :date,
-                    description = :description
+                    description = :description,
+                    etat = :etat
                 WHERE id= :id'
             );
             $query->execute([
                 'id' => $id,
                 'titre' => $forum->getTitre(),
                 'date' => $forum->getDate(),
-                'description' => $forum->getDescription()
+                'description' => $forum->getDescription(),
+                'etat' => $forum->getEtat()
             ]);
             echo $query->rowCount() . " records UPDATED successfully <br>";
         } catch (PDOException $e) {
@@ -105,7 +108,7 @@ class forumC
 
     function rechercheForum($rech)
     {
-        $sql = "SELECT * FROM forum where forum.titre like '%$rech%' or forum.description like '%$rech%'";
+        $sql = "SELECT * FROM forum where forum.titre like '%$rech%' or forum.description like '%$rech%' or forum.etat like '%$rech%'";
         $db = config::getConnexion();
         try {
             $list = $db->query($sql);
@@ -144,4 +147,31 @@ class forumC
             die('Erreur: '.$e->getMessage());
         }   
     }
+    public function afficheformumcomment($id)
+{
+    $sql = "SELECT * FROM forum WHERE id = $id";
+    $conn = new config();
+    $db = $conn->getConnexion();
+    
+    try {
+        $query = $db->prepare($sql);
+        $query->execute();
+    
+        $forum = $query->fetch();
+    
+       
+        $sqlComments = "SELECT * FROM commentaire WHERE id_forum =? ";
+        $queryComments = $db->prepare($sqlComments);
+        $queryComments->bindParam(1 , $id, PDO::PARAM_INT);
+        $queryComments->execute();
+    
+        $comments = $queryComments->fetchAll(PDO::FETCH_ASSOC);
+    
+       
+        return ['forum' => $forum, 'comments' => $comments];
+    } catch (Exception $e) {
+        die('Erreur: ' . $e->getMessage());
+    }
+    
+}
 }
