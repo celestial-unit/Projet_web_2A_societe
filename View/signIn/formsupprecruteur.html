@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Form for students</title>
+  <link rel="stylesheet" href="formsupprecruteur.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body id="main">
+
+  <header>
+    <div class="survey-header">
+      <h1 id="title">Form for formers</h1>
+      <p id="description">Thank you for taking your precious time to full fill the form!</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="survey-container">
+      <form id="survey-form" method="get" action="../../Model/formrecruteurget.php" onsubmit="return validateForm()" >
+
+        <!--         for firstname -->
+        <div class="survey-element" id="survey-name">
+          <label for="name" >First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" >
+        </div>
+         <!--         for lastname -->
+        <div class="survey-element" id="survey-name">
+            <label for="name" >Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" >
+          </div>
+
+        <!--         for email -->
+        <div class="survey-element" id="survey-email">
+          <label for="email" >Phone Number</label>
+          <input type="number" id="num" placeholder="Enter your phone number" name="num" >
+        </div>
+
+        <!--         for type of the former -->
+        <div>
+          <label for="text" >Recruiter_domain</label>
+          <input type="text" id="Recruiterdomain" placeholder="Recruiter_domain" name="Recruiterdomain">
+        </div>
+         <!--         for diploma of the former -->
+        <div>
+            <label for="text">Recruiter_title</label>
+            <input type="text" id="Recruitertitle" placeholder="Recruiter_title" name="Recruitertitle">
+        </div>
+         <!--         for cin of the former -->
+        <div >
+            <label for="text">Adresse</label>
+            <input type="text" id="adresse" placeholder="Adress of training" name="adresse">
+        </div>
+        <!--         Submit button -->
+        <div class="survey-element" id="survey-submit">
+          <input type="submit" id="submit"  value="Send us" >
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+<script>
+  function verifieLettresAlphabetiques(chaine) {
+  var regex = /^[a-zA-Z]+$/;
+  return regex.test(chaine);
+}
+    function validateForm()
+    {
+       
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var number = document.getElementById("num").value;
+            var Recruiter_title = document.getElementById("Recruitertitle").value;
+            var Recruiter_domain = document.getElementById("Recruiterdomain").value;
+            var adresse= document.getElementById("adresse").value;
+        
+
+            if (firstName === "" || lastName === "" || number === "" || Recruiter_title=== "" ||  Recruiter_domain === "" || adresse === "" ) {
+            alert("Please fill in all required fields and ensure the email field contains '@gmail.com', the 'Recruiter_title' is not empty, the 'Diploma' is not empty, the 'CIN' is not empty, the 'Recruiter_domain ' is not empty, and the 'Number' field has at least 8 characters.");
+            return false;
+            }
+            if (!verifieLettresAlphabetiques(firstName)) 
+            {
+              alert("Please entre your name correctly.");
+              return false;
+            }
+              if (!verifieLettresAlphabetiques(lastName))
+               {
+              alert("Please entre your name correctly.");
+              return false;
+            }
+            if ( num.length <8) 
+            {
+            alert("Please enter a valid num.");
+            return false;
+            }
+            return true;
+    
+    }
+  </script>
+  
+
+</body>
+</html>

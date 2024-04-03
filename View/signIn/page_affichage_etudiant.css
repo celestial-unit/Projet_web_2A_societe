@@ -1,0 +1,136 @@
+
+
+
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  align-items: center;
+  background-color: azure;
+  display: flex;
+  font-family: sans-serif;
+  justify-content: center;
+}
+
+.table-users {
+  border: 1px solid darkturquoise;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  max-width: 1000px;
+  overflow: hidden;
+  width: 1200px;
+  padding: 20px; 
+}
+.table-users .table-row {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+.table-users .table-row div {
+  box-sizing: border-box;
+}
+.table-users .table-row.header {
+  background-color: rgb(123, 67, 39);
+  color: white;
+  font-size: 1.3em;
+  justify-content: center;
+  padding: 0.5em;
+}
+.table-users .table-row.item {
+  align-items: center;
+  background-color: white;
+  font-size: 1em;
+  
+}
+.table-users .table-row.item:not(:last-child) {
+  border-bottom: 5px solid #f1f1f1;
+  flex: 2;
+  margin: 1em 0;
+  padding: 1em;
+}
+.table-users .table-row.item > div:first-child {
+    flex: 0;
+    flex-basis: 15px;
+    padding: 0.5em;
+    padding-left: 10;
+  
+}
+.table-users .table-row.item .info {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  
+}
+.table-users .table-row.item .info div {
+  flex: 1;
+  text-align: center;
+  margin: 0.5em 0;
+  padding: 0.5em;
+  padding-left: 10;
+}
+.table-users .table-row.names div {
+  background-color: #f1f1f1;
+  flex: 1;
+  padding: 0.5em;
+  text-align: center;
+}
+.table-users .table-row.names div:first-child {
+  flex-basis: 100px;
+  flex: 1;
+  text-align: center;
+  margin: 0.5em 0;
+  padding: 0.5em;
+}
+.table-users .table-row img {
+  border-radius: 50%;
+  max-width: 100%;
+}
+@media screen and (max-width: 580px) {
+  .table-users .table-row.item .info {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .table-users .table-row.item .info div {
+    padding: 0.3em;
+    text-align: left;
+    
+  }
+  .table-users .table-row.item .info div:before {
+    color: gray;
+    display: inline-block;
+    width: 100px;
+    
+  }
+  .table-users .table-row.item .info div:nth-child(1):before {
+    content: "Name:";
+  }
+  .table-users .table-row.item .info div:nth-child(2):before {
+    content: "Email:";
+  }
+  .table-users .table-row.item .info div:nth-child(3):before {
+    content: "Phone:";
+  }
+  .table-users .table-row.names {
+    display: none;
+  }
+}
+@media screen and (max-width: 400px) {
+  .table-users .table-row {
+    flex-direction: column;
+    padding-bottom: 1em;
+  }
+  .table-users .table-row.item div:first-child {
+    flex: 1;
+  }
+  .table-users .table-row.header {
+    align-items: center;
+  }
+}
+
