@@ -1,0 +1,28 @@
+<?php
+include('clubConnect.php');
+
+$club = new Club();
+$club->showClub();
+
+$pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$clubsPerPage = 3; // Adjust this to the desired number of clubs per page
+
+$lastClubMail = isset($_GET['lastClubMail']) ? $_GET['lastClubMail'] : '';
+
+$clubs = $club->getClubsByPage($pageNumber, $clubsPerPage, $lastClubMail);
+
+foreach ($clubs as $club) {
+    // Display club information
+    echo "<p>{$club['name']} - {$club['description']}</p>";
+}
+
+// Previous Page
+if ($pageNumber > 1) {
+    echo '<a href="?page=' . ($pageNumber - 1) . '&lastClubMail=' . $clubs[0]['clubMail'] . '">Previous</a>';
+}
+
+// Next Page
+if (count($clubs) == $clubsPerPage) {
+    echo '<a href="?page=' . ($pageNumber + 1) . '&lastClubMail=' . end($clubs)['clubMail'] . '">Next</a>';
+}
+?>
